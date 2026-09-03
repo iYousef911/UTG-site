@@ -4,24 +4,26 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Cookies — UTG</title>
-  <meta name="description" content="This static UTG website does not use a cookie-consent popup and does not set tracking cookies. How cookies relate to the iOS app.">
+  <meta name="description" content="UTG website cookies: no cookie banner, no ads. Self-hosted Umami page analytics. How this relates to the iOS app.">
   <link rel="canonical" href="https://utg.yadev.tech/cookies.html">
   <link rel="icon" href="favicon.ico" sizes="any">
   <link rel="icon" href="favicon.png?v=3" type="image/png">
   <link rel="apple-touch-icon" href="apple-touch-icon.png?v=3">
   <link rel="manifest" href="site.webmanifest">
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="preconnect" href="https://umami.yadev.tech" crossorigin>
+  <script defer src="https://umami.yadev.tech/script.js" data-website-id="3b7d6b0b-5875-4dd4-8713-8d16aa405279" data-domains="utg.yadev.tech" data-do-not-track="true"></script>
   <meta name="apple-itunes-app" content="app-id=1480143119">
   <meta name="theme-color" content="#07080c">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="UTG – Up To Game Pro">
   <meta property="og:title" content="Cookies — UTG">
-  <meta property="og:description" content="This static UTG website does not use a cookie-consent popup and does not set tracking cookies. How cookies relate to the iOS app.">
+  <meta property="og:description" content="No cookie banner and no ads on this site. Page analytics via self-hosted Umami. How this relates to the iOS app.">
   <meta property="og:url" content="https://utg.yadev.tech/cookies.html">
   <meta property="og:image" content="https://utg.yadev.tech/img/og.png">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Cookies — UTG">
-  <meta name="twitter:description" content="This static UTG website does not use a cookie-consent popup and does not set tracking cookies. How cookies relate to the iOS app.">
+  <meta name="twitter:description" content="No cookie banner and no ads on this site. Page analytics via self-hosted Umami. How this relates to the iOS app.">
   <meta name="twitter:image" content="https://utg.yadev.tech/img/og.png">
   
 </head>
@@ -51,9 +53,10 @@
   </div>
   <article class="wrap legal">
     <h2>This website</h2>
-    <p>The UTG marketing and legal site is static HTML. We do not set advertising cookies, analytics cookies, or a cookie wall. We do not load third-party ad or tag-manager scripts on these pages.</p>
-    <p>Your browser and the host (Hostinger) may still create ordinary connection logs (IP address, user agent, requested path) on the server. That is not a browser cookie we drop from this page.</p>
-    <p>If we later add a strictly necessary cookie (for example a security cookie) or an analytics tool, we will describe it here first. We will not block Privacy, Terms, or other legal pages behind a consent modal.</p>
+    <p>There is no cookie-consent popup. We do not set advertising cookies and we do not load Google Analytics, ad pixels, or a tag manager.</p>
+    <p>Pages load a small script from our own Umami instance at <strong>https://umami.yadev.tech</strong>. It records page path, referrer, browser, OS, device type, screen size, and country. It is not used for ads. Browsers that send Do Not Track are not counted.</p>
+    <p>Your browser and the host may still create ordinary connection logs (IP address, user agent, requested path). That is separate from Umami.</p>
+    <p>We will not block Privacy, Terms, or other legal pages behind a consent modal.</p>
     <h2>The iOS app</h2>
     <p>UTG is a native app. It does not use website cookies to log you in. Optional sign-in uses Apple, Google, or Firebase. Preferences, follows, and collections may be stored on device and in iCloud. See the <a href="privacy.html">Privacy Policy</a>.</p>
     <h2>Your browser controls</h2>
