@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://REPLACE_DOMAIN/sitemap.xml
+Sitemap: https://utg.yadev.tech/sitemap.xml

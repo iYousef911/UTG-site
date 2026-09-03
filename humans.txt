@@ -1,7 +1,7 @@
 /* TEAM */
-Operator: REPLACE_LEGAL_NAME
-Contact: REPLACE_EMAIL
-Location: REPLACE_COUNTRY
+Operator: Yad3V
+Contact: yad3v.dev@gmail.com
+Location: Saudi Arabia
 
 /* SITE */
 Last update: 2026/09/03
