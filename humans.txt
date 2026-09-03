@@ -1,0 +1,12 @@
+/* TEAM */
+Operator: REPLACE_LEGAL_NAME
+Contact: REPLACE_EMAIL
+Location: REPLACE_COUNTRY
+
+/* SITE */
+Last update: 2026/09/03
+Language: English
+Standards: HTML5, CSS3
+Doctype: HTML5
+Software: Static files for Hostinger public_html
+App: UTG – Up To Game Pro (iOS, App Store ID 1480143119)

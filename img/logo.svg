@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="t d">
+  <title id="t">UTG</title>
+  <desc id="d">Up To Game mark</desc>
+  <rect width="64" height="64" rx="14" fill="#0b0d13"/>
+  <rect x="1.5" y="1.5" width="61" height="61" rx="12.5" fill="none" stroke="#c8ff3e" stroke-width="1.5"/>
+  <path d="M16 40 L32 16 L48 40" fill="none" stroke="#c8ff3e" stroke-width="5" stroke-linecap="square" stroke-linejoin="miter"/>
+  <rect x="28" y="36" width="8" height="14" fill="#c8ff3e"/>
+</svg>
