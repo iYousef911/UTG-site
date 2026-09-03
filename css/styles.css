@@ -140,6 +140,8 @@ button:focus-visible,
   width: 36px;
   height: 36px;
   flex: none;
+  border-radius: 8px;
+  object-fit: cover;
 }
 .logo-text {
   display: flex;
@@ -538,24 +540,18 @@ main { position: relative; z-index: 1; }
 
 .shot {
   margin: 0;
-  border: 1px dashed var(--line-hot);
+  border: 1px solid var(--line);
   border-radius: 16px;
   overflow: hidden;
-  background: repeating-linear-gradient(
-    -45deg,
-    rgba(200, 255, 62, 0.04),
-    rgba(200, 255, 62, 0.04) 8px,
-    transparent 8px,
-    transparent 16px
-  );
-  min-height: 200px;
+  background: #000;
+  max-width: 360px;
 }
 .shot img {
   width: 100%;
   height: auto;
-  min-height: 200px;
-  object-fit: cover;
-  background: var(--elev-2);
+  display: block;
+  object-fit: contain;
+  background: #000;
 }
 .shot figcaption {
   padding: 0.45rem 0.7rem 0.6rem;
@@ -566,7 +562,6 @@ main { position: relative; z-index: 1; }
   width: 56px;
   height: 56px;
   border-radius: 14px;
-  border: 1px dashed var(--line-hot);
   object-fit: cover;
   background: var(--elev);
 }

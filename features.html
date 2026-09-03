@@ -7,6 +7,7 @@
   <meta name="description" content="UTG features: 3 free follows, Pro+ unlimited, price Buy or Wait, iCloud collections, limited AI, Epic/Game Pass/giveaways, weather and nearby play.">
   <link rel="canonical" href="https://REPLACE_DOMAIN/features.html">
   <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
   <link rel="stylesheet" href="css/styles.css">
   <meta name="apple-itunes-app" content="app-id=1480143119">
   <meta name="theme-color" content="#07080c">
@@ -20,7 +21,6 @@
   <meta name="twitter:title" content="Features — UTG">
   <meta name="twitter:description" content="Follow 3 games free, or go unlimited with Pro+. Dates, alerts, prices, iCloud collections, and optional AI.">
   <meta name="twitter:image" content="https://REPLACE_DOMAIN/img/og.png">
-  <!-- TODO: add img/og.png (1200×630) and img/apple-touch-icon.png (180×180) -->
 </head>
 <body>
 
@@ -28,7 +28,7 @@
 <header class="site-header">
   <div class="header-inner">
     <a class="logo" href="index.html">
-      <img class="logo-mark" src="img/logo.svg" width="36" height="36" alt="">
+      <img class="logo-mark" src="assets/app-icon.png" width="36" height="36" alt="">
       <span class="logo-text"><strong>UTG</strong><span>Up To Game Pro</span></span>
     </a>
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu"><span></span></button>
@@ -41,7 +41,6 @@
 <main id="content">
 
   <div class="wrap page-hero">
-    <!-- TODO: add /assets/app-icon.png -->
     <img class="hero-icon" src="assets/app-icon.png" width="56" height="56" alt="UTG app icon">
     <p class="kicker">Features</p>
     <h1>One list. Honest limits.</h1>
@@ -85,10 +84,8 @@
         <h3>Upcoming releases</h3>
         <p>Track upcoming (and out-now) dates for games you follow. The free watchlist is three titles on purpose — enough for the “aha” of a personal release plan, small enough that alerts stay useful. UTG Pro+ lifts the follow limit when you want a longer list.</p>
       </div>
-      <!-- TODO: add /assets/follow.png -->
       <figure class="shot">
-        <img src="assets/follow.png" width="1200" height="800" alt="Following upcoming games in UTG">
-        <figcaption>Placeholder: <code>/assets/follow.png</code></figcaption>
+        <img src="assets/hero.png" width="1179" height="2556" alt="Game page with release date and alert bell">
       </figure>
     </div>
 
@@ -98,10 +95,8 @@
         <h3>Price tracking / Buy or Wait</h3>
         <p>Compare a current listing with historical-low context so you can wait or buy with less guesswork. Full price tools are UTG Pro+. Verdicts are informational, not financial advice. UTG is not a storefront. <strong>We do not store payment cards</strong> — Apple In-App Purchase handles Pro+ billing.</p>
       </div>
-      <!-- TODO: add /assets/hero.png if you want a price screenshot here; follow.png is the follow UI -->
       <figure class="shot">
-        <img src="assets/hero.png" width="1200" height="2400" alt="UTG on iPhone">
-        <figcaption>Placeholder: <code>/assets/hero.png</code></figcaption>
+        <img src="assets/price.png" width="1179" height="2556" alt="Buy or Wait with historical low versus current Steam price">
       </figure>
     </div>
 
@@ -110,20 +105,22 @@
         <p class="limit">Limited free tries · then Pro+</p>
         <h3>AI game advisor + chat</h3>
         <p>Ask for a recommendation, a “what should I play,” or a second look at a title. Free users get limited tries; after that, UTG Pro+. Prompts go through our backend to OpenAI. Do not include passwords or personal data. The model can be wrong — check the catalog date before you rearrange your week.</p>
+        <p class="fine">If you send an AI chat screenshot later, it can go here as <code>assets/ai.png</code>.</p>
       </div>
-      <!-- TODO: add /assets/ai.png -->
+    </div>
+
+    <div class="feature-block reverse">
+      <div>
+        <p class="limit">On-device + iCloud</p>
+        <h3>Collections with iCloud</h3>
+        <p>Favorites and collections sync with iCloud on the Apple ID signed into the device. We do not sell your game list and we do not share it for advertising. See the <a href="privacy.html">Privacy Policy</a>.</p>
+      </div>
       <figure class="shot">
-        <img src="assets/ai.png" width="1200" height="800" alt="UTG AI game advisor">
-        <figcaption>Placeholder: <code>/assets/ai.png</code></figcaption>
+        <img src="assets/follow.png" width="1179" height="2556" alt="Collections with iCloud in UTG">
       </figure>
     </div>
 
     <div class="grid grid-2">
-      <article class="card">
-        <p class="meta">Library</p>
-        <h3>Collections with iCloud</h3>
-        <p>Favorites and collections sync with iCloud on the Apple ID signed into the device. We do not sell your game list and we do not share it for advertising. See the <a href="privacy.html">Privacy Policy</a>.</p>
-      </article>
       <article class="card">
         <p class="meta">Catalogs</p>
         <h3>Free &amp; included</h3>
@@ -192,7 +189,7 @@
   <div class="wrap footer-grid">
     <div>
       <a class="logo" href="index.html">
-        <img class="logo-mark" src="img/logo.svg" width="36" height="36" alt="">
+        <img class="logo-mark" src="assets/app-icon.png" width="36" height="36" alt="">
         <span class="logo-text"><strong>UTG</strong><span>Up To Game Pro</span></span>
       </a>
       <p class="fine">An iOS game companion. Discover, follow, get notified.</p>
