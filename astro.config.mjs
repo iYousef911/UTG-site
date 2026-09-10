@@ -3,6 +3,7 @@ import { join } from "node:path";
 import { defineConfig } from "astro/config";
 import sitemap from "@astrojs/sitemap";
 import { aasaDocument } from "./src/data/universal-links.ts";
+import { collectStatus } from "./scripts/status-lib.mjs";
 
 const aasa = JSON.stringify(aasaDocument(), null, 2);
 mkdirSync("public/.well-known", { recursive: true });
@@ -10,6 +11,27 @@ writeFileSync("public/.well-known/apple-app-site-association", aasa);
 writeFileSync("public/.well-known/apple-app-site-association.json", aasa);
 writeFileSync("public/apple-app-site-association", aasa);
 writeFileSync("public/apple-app-site-association.json", aasa);
+
+function serveStatusApi() {
+  return async (req, res, next) => {
+    const path = req.url?.split("?")[0];
+    if (path !== "/api/status.json") {
+      next();
+      return;
+    }
+    try {
+      const payload = await collectStatus();
+      res.statusCode = 200;
+      res.setHeader("Content-Type", "application/json; charset=utf-8");
+      res.setHeader("Cache-Control", "public, max-age=30");
+      res.end(JSON.stringify(payload));
+    } catch {
+      res.statusCode = 502;
+      res.setHeader("Content-Type", "application/json; charset=utf-8");
+      res.end(JSON.stringify({ error: "status check failed" }));
+    }
+  };
+}
 
 function serveAasa(root) {
   return (req, res, next) => {
@@ -62,10 +84,12 @@ function aasaIntegration() {
     name: "aasa-json",
     hooks: {
       "astro:server:setup"({ server }) {
+        server.middlewares.use(serveStatusApi());
         server.middlewares.use(serveAasa("public"));
         server.middlewares.use(rewriteAppFallbacks(false));
       },
       "astro:preview:setup"({ server }) {
+        server.middlewares.use(serveStatusApi());
         server.middlewares.use(serveAasa("dist"));
         server.middlewares.use(rewriteAppFallbacks(true));
       },

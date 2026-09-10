@@ -1,26 +1,100 @@
 ---
 import Base from "../layouts/Base.astro";
+import { STATUS_ITEMS } from "../../scripts/status-lib.mjs";
 ---
 
-<Base title="Status" description="Systems UTG depends on. This is not a live dashboard." path="/status">
+<Base
+  title="Status"
+  description="Live status for systems UTG depends on. Checks Apple, RevenueCat, OpenAI, IGDB, CheapShark, Firebase, and this website."
+  path="/status"
+>
   <div class="wrap page-hero">
     <p class="kicker">Status</p>
     <h1>Systems we depend on</h1>
-    <p>This is not a live dashboard. If a provider below is degraded, the matching UTG feature may fail even when this website is up.</p>
+    <p>
+      Live checks against public status feeds. This is the website checker, not the iOS app itself. A green row here does not prove a specific device can reach that service.
+    </p>
+    <p class="status-overall" data-overall>
+      <span class="dot dot-checking" aria-hidden="true"></span>
+      <strong data-overall-label>Checking…</strong>
+      <span class="fine" data-checked-at></span>
+    </p>
   </div>
   <section class="wrap section">
-    <ul class="status-list">
-      <li><span class="dot" aria-hidden="true"></span><div><strong>Apple App Store &amp; In-App Purchase</strong>Download, restore, and UTG Pro+ billing.</div></li>
-      <li><span class="dot" aria-hidden="true"></span><div><strong>Apple Push Notification service</strong>Release and related alerts.</div></li>
-      <li><span class="dot" aria-hidden="true"></span><div><strong>Apple iCloud</strong>Collections sync.</div></li>
-      <li><span class="dot" aria-hidden="true"></span><div><strong>Sign in with Apple / Google Sign-In / Firebase Authentication</strong>Optional accounts.</div></li>
-      <li><span class="dot" aria-hidden="true"></span><div><strong>IGDB</strong>Game catalog and metadata.</div></li>
-      <li><span class="dot" aria-hidden="true"></span><div><strong>CheapShark / Steam storefront data</strong>Price tracking.</div></li>
-      <li><span class="dot" aria-hidden="true"></span><div><strong>RevenueCat</strong>Subscription entitlement status for Pro+.</div></li>
-      <li><span class="dot" aria-hidden="true"></span><div><strong>AI inference provider</strong>Recommendations, chat, Buy/Wait.</div></li>
-      <li><span class="dot" aria-hidden="true"></span><div><strong>Weather &amp; map providers</strong>Local play features when location is allowed.</div></li>
-      <li><span class="dot" aria-hidden="true"></span><div><strong>This website host</strong>Marketing and legal pages only — not the app binary.</div></li>
+    <ul class="status-list" data-status-list>
+      {
+        STATUS_ITEMS.map((item) => (
+          <li data-id={item.id} data-state="checking">
+            <span class="dot dot-checking" aria-hidden="true"></span>
+            <div>
+              <strong>{item.name}</strong>
+              <p class="status-blurb">{item.blurb}</p>
+              <p class="status-detail fine">Checking public status…</p>
+              <a class="fine" href={item.href}>Official status</a>
+            </div>
+          </li>
+        ))
+      }
     </ul>
-    <p class="fine">For app issues, email <a class="mail" href="mailto:yad3v.dev@gmail.com">yad3v.dev@gmail.com</a>. For Apple outages, check Apple’s system status pages.</p>
+    <p class="fine">
+      For app issues, email <a class="mail" href="mailto:yad3v.dev@gmail.com">yad3v.dev@gmail.com</a>.
+      Apple: <a href="https://www.apple.com/support/systemstatus/">system status</a>
+      and <a href="https://developer.apple.com/system-status/">developer status</a>.
+    </p>
+    <noscript>
+      <p class="callout">JavaScript is required for live checks. Use the official status links above.</p>
+    </noscript>
   </section>
 </Base>
+
+<script>
+  const labels = {
+    operational: "Operational",
+    degraded: "Degraded",
+    outage: "Outage",
+    unknown: "Unknown",
+  };
+
+  const overallCopy = {
+    operational: "All checked systems look up.",
+    degraded: "Something in the stack is degraded.",
+    outage: "An upstream service has an outage.",
+    unknown: "Some checks could not be completed.",
+  };
+
+  async function refresh() {
+    const overallEl = document.querySelector("[data-overall]");
+    const labelEl = document.querySelector("[data-overall-label]");
+    const timeEl = document.querySelector("[data-checked-at]");
+    try {
+      const res = await fetch("/api/status.json", { cache: "no-store" });
+      if (!res.ok) throw new Error(String(res.status));
+      const data = await res.json();
+      for (const item of data.items ?? []) {
+        const row = document.querySelector(`[data-id="${item.id}"]`);
+        if (!(row instanceof HTMLElement)) continue;
+        row.dataset.state = item.state;
+        const dot = row.querySelector(".dot");
+        if (dot) dot.className = `dot dot-${item.state}`;
+        const detail = row.querySelector(".status-detail");
+        if (detail) detail.textContent = item.detail || labels[item.state] || item.state;
+      }
+      const overall = data.overall || "unknown";
+      if (overallEl instanceof HTMLElement) overallEl.dataset.state = overall;
+      const oDot = overallEl?.querySelector(".dot");
+      if (oDot) oDot.className = `dot dot-${overall}`;
+      if (labelEl) labelEl.textContent = overallCopy[overall] || labels[overall];
+      if (timeEl && data.checkedAt) {
+        const when = new Date(data.checkedAt);
+        timeEl.textContent = `Checked ${when.toLocaleString(undefined, { dateStyle: "medium", timeStyle: "short" })}. Refreshes every minute.`;
+      }
+    } catch {
+      if (labelEl) labelEl.textContent = "Live checker unreachable. The static list below is the last known set of dependencies.";
+      const oDot = overallEl?.querySelector(".dot");
+      if (oDot) oDot.className = "dot dot-unknown";
+    }
+  }
+
+  refresh();
+  setInterval(refresh, 60_000);
+</script>

@@ -1,6 +1,7 @@
 import { createServer } from "node:http";
 import { existsSync, readFileSync, statSync } from "node:fs";
 import { extname, join, normalize, relative, resolve } from "node:path";
+import { collectStatus } from "./status-lib.mjs";
 
 const root = resolve("dist");
 const host = process.env.HOST || "0.0.0.0";
@@ -43,10 +44,20 @@ function rewrite(pathname) {
   return { file: pathname };
 }
 
-createServer((req, res) => {
+createServer(async (req, res) => {
   const url = new URL(req.url || "/", `http://${req.headers.host}`);
   let pathname = decodeURIComponent(url.pathname);
   if (pathname.length > 1 && pathname.endsWith("/")) pathname = pathname.slice(0, -1);
+
+  if (pathname === "/api/status.json") {
+    try {
+      const payload = await collectStatus();
+      send(res, 200, { "Content-Type": "application/json; charset=utf-8", "Cache-Control": "public, max-age=30" }, JSON.stringify(payload));
+    } catch {
+      send(res, 502, { "Content-Type": "application/json; charset=utf-8" }, JSON.stringify({ error: "status check failed" }));
+    }
+    return;
+  }
 
   const mapped = rewrite(pathname);
   const candidates = [];

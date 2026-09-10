@@ -5,25 +5,22 @@ import Phone from "./Phone.astro";
 <div class="device-stage">
   <Phone
     variant="a"
-    src="/assets/hero-watchlist.png"
-    alt="UTG collections and followed games on iPhone"
-    caption="Watchlist"
-    loading="lazy"
+    src="/assets/search.png"
+    alt="UTG search with Coming soon and Trending on IGDB"
+    caption="Browse"
   />
   <Phone
     variant="b"
-    src="/assets/hero-widgets.png"
-    alt="Placeholder for a UTG Home Screen widget screenshot. Replace assets/hero-widgets.png with a real capture."
+    src="/assets/widgets.png"
+    alt="UTG Home Screen widgets showing the next followed release"
     caption="Widgets"
-    placeholder="assets/hero-widgets.png"
-    loading="eager"
-    fetchpriority="high"
   />
   <Phone
     variant="c"
-    src="/assets/hero-countdown.png"
-    alt="UTG game page showing a release date and alert controls"
-    caption="Countdown"
-    loading="lazy"
+    src="/assets/game.png"
+    alt="UTG game page for Counter-Strike 2 with live context and release date"
+    caption="Game page"
+    loading="eager"
+    fetchpriority="high"
   />
 </div>

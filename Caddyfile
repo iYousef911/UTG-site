@@ -12,6 +12,10 @@
 	header X-Frame-Options SAMEORIGIN
 	header Permissions-Policy "camera=(), microphone=(), geolocation=()"
 
+	handle /api/status.json {
+		reverse_proxy 127.0.0.1:3001
+	}
+
 	# Apple fetches this URL and does not follow redirects.
 	handle /.well-known/apple-app-site-association {
 		header Content-Type application/json
