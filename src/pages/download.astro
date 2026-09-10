@@ -1,0 +1,52 @@
+---
+import Base from "../layouts/Base.astro";
+import StoreBadge from "../components/StoreBadge.astro";
+import { SITE } from "../config";
+---
+
+<Base
+  title="Download"
+  description="Download UTG – Up To Game Pro on the App Store. iOS 18 or later. App Store ID 1480143119."
+  path="/download"
+  current="/download"
+>
+  <div class="wrap page-hero">
+    <p class="kicker">Download</p>
+    <h1>Get UTG on the App Store</h1>
+    <p>iPhone and iPad, iOS 18 or later. Look for UTG – Up To Game Pro, Apple ID {SITE.appId}.</p>
+  </div>
+
+  <section class="wrap section">
+    <div class="hero-actions">
+      <StoreBadge />
+      <a class="btn btn-ghost" href="/support">Need help installing?</a>
+    </div>
+    <p class="fine">This site does not host the IPA. Apple delivers the app.</p>
+    <figure class="shot" style="margin-top:1.5rem">
+      <img src="/assets/hero-countdown.png" width="390" height="844" alt="UTG on iPhone" loading="lazy" decoding="async" />
+    </figure>
+  </section>
+
+  <section class="wrap section">
+    <h2>If the app is already installed</h2>
+    <p class="intro">
+      Safari may show Apple’s Smart App Banner at the top of this page (app-id {SITE.appId}). That banner can open UTG on the device. If the banner does not appear, use the App Store badge — it is the reliable fallback.
+    </p>
+    <p>
+      Universal Link fallbacks live on this domain (for example <a href="/game/1942">/game/1942</a>). The association file is at
+      <a href="/.well-known/apple-app-site-association"><code>/.well-known/apple-app-site-association</code></a>.
+      The site cannot finish Universal Links by itself: the iOS app must add <code>applinks:utg.yadev.tech</code> and handle
+      <code>NSUserActivityTypeBrowsingWeb</code>. Details: <a href="/universal-links">Universal Links</a>.
+    </p>
+  </section>
+
+  <section class="wrap section">
+    <h2>Compatibility</h2>
+    <div class="grid grid-2">
+      <article class="card"><h3>iPhone &amp; iPad</h3><p>iOS 18.0 / iPadOS 18.0 or later.</p></article>
+      <article class="card"><h3>Apple Watch</h3><p>watchOS 11 or later for the companion complications.</p></article>
+      <article class="card"><h3>Network</h3><p>Catalog, prices, AI, news, and push alerts need an internet connection.</p></article>
+      <article class="card"><h3>Not a store</h3><p>UTG does not sell games. Catalog and AI data can be wrong — confirm on the official store.</p></article>
+    </div>
+  </section>
+</Base>

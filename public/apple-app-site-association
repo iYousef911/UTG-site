@@ -1,0 +1,67 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "RGSEF8E3RM.com.ya-techno.UTG-SwitUI",
+        "paths": [
+          "/game/*",
+          "/discover",
+          "/favorites",
+          "/collections",
+          "/news",
+          "/news/*",
+          "/events",
+          "/premium",
+          "/deals",
+          "/deals/*"
+        ],
+        "appIDs": [
+          "RGSEF8E3RM.com.ya-techno.UTG-SwitUI"
+        ],
+        "components": [
+          {
+            "/": "/game/*",
+            "comment": "Game"
+          },
+          {
+            "/": "/discover",
+            "comment": "Discover"
+          },
+          {
+            "/": "/favorites",
+            "comment": "Favorites"
+          },
+          {
+            "/": "/collections",
+            "comment": "Collections"
+          },
+          {
+            "/": "/news",
+            "comment": "News"
+          },
+          {
+            "/": "/news/*",
+            "comment": "News item"
+          },
+          {
+            "/": "/events",
+            "comment": "Events"
+          },
+          {
+            "/": "/premium",
+            "comment": "UTG Pro+"
+          },
+          {
+            "/": "/deals",
+            "comment": "Deals"
+          },
+          {
+            "/": "/deals/*",
+            "comment": "Deal"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,17 @@
+---
+import Base from "../layouts/Base.astro";
+import OpenInApp from "../components/OpenInApp.astro";
+---
+
+<Base
+  title="UTG Pro+"
+  description="Open the Pro+ screen in UTG. Billing is Apple In-App Purchase, not this website."
+  path="/premium"
+>
+  <OpenInApp
+    kind="screen"
+    screen="premium"
+    title="UTG Pro+"
+    lede="This opens the in-app Pro+ screen. We do not take card numbers on the website. Apple handles billing."
+  />
+</Base>

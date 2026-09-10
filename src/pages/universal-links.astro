@@ -1,0 +1,85 @@
+---
+import Base from "../layouts/Base.astro";
+import { SITE } from "../config";
+import { APPLE_APP_ID, ASSOCIATED_DOMAIN, UNIVERSAL_ROUTES } from "../data/universal-links";
+---
+
+<Base
+  title="Universal Links"
+  description="How https://utg.yadev.tech maps to gamedb:// routes, and what the iOS app must still do."
+  path="/universal-links"
+>
+  <div class="wrap page-hero">
+    <p class="kicker">Developers</p>
+    <h1>Universal Links</h1>
+    <p>
+      This website can advertise and fall back. It cannot open UTG by itself. Apple only hands an <code>https://</code> tap to the app after both sides agree.
+    </p>
+  </div>
+
+  <article class="wrap legal">
+    <h2>What this domain serves</h2>
+    <ul>
+      <li>
+        Association file: <a href="/.well-known/apple-app-site-association"><code>/.well-known/apple-app-site-association</code></a>
+        (must be HTTPS 200, <code>application/json</code>, no redirect). Fallback copy at
+        <a href="/apple-app-site-association"><code>/apple-app-site-association</code></a>.
+        Production is Caddy — use the repo <code>Caddyfile</code> (internal rewrite to the <code>.json</code> copy, not a 301).
+        Apache hosts can use <code>.htaccess</code> instead.
+      </li>
+      <li>App ID in that file: <code>{APPLE_APP_ID}</code> (Team {APPLE_APP_ID.split(".")[0]} + bundle <code>com.ya-techno.UTG-SwitUI</code>).</li>
+      <li>Smart App Banner: <code>apple-itunes-app</code> with <code>app-id={SITE.appId}</code> and <code>app-argument</code> set to the current page URL.</li>
+      <li>HTML fallbacks for the paths below, including <a href="/game/1942">/game/1942</a>.</li>
+      <li>Machine-readable map: <a href="/llms.txt">/llms.txt</a>.</li>
+    </ul>
+
+    <h2>https → gamedb://</h2>
+    <table class="map-table">
+      <thead>
+        <tr><th>Website</th><th>App</th></tr>
+      </thead>
+      <tbody>
+        {
+          UNIVERSAL_ROUTES.map((route) => (
+            <tr>
+              <td><code>{SITE.url}{route.https}</code></td>
+              <td><code>{route.gamedb}</code></td>
+            </tr>
+          ))
+        }
+      </tbody>
+    </table>
+
+    <h2>What the iOS app must add</h2>
+    <p>The current entitlements file does not include Associated Domains. Existing <code>gamedb://</code> handling in <code>openURLContexts</code> does not receive Universal Links.</p>
+    <ol class="steps">
+      <li>Xcode → Signing &amp; Capabilities → Associated Domains → add <code>{ASSOCIATED_DOMAIN}</code> (no <code>https://</code>, no path).</li>
+      <li>
+        Handle <code>NSUserActivityTypeBrowsingWeb</code>. Read <code>userActivity.webpageURL</code>, map the path to the matching
+        <code>gamedb://</code> route, then reuse the current deep-link handler.
+      </li>
+      <li>Ship that build. Apple’s CDN caches the AASA file; allow a delay after the first install or entitlement change.</li>
+    </ol>
+    <pre class="glance"><code>{`func scene(_ scene: UIScene, continue userActivity: NSUserActivity,
+           restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
+    if userActivity.activityType == NSUserActivityTypeBrowsingWeb,
+       let url = userActivity.webpageURL {
+        handleUniversalLink(url) // map https://utg.yadev.tech/… → gamedb://…
+        return true
+    }
+    // existing Spotlight / Siri handling…
+    return false
+}`}</code></pre>
+    <div class="callout">
+      <p>
+        Safari already on <code>utg.yadev.tech</code> usually will not bounce into the app. That is why fallback pages have an
+        <strong>Open in UTG</strong> button using <code>gamedb://</code>, plus the App Store badge.
+      </p>
+    </div>
+    <h2>What we do not claim</h2>
+    <p>
+      We do not scrape IGDB on this site unless an API key is provided at build time. Game fallbacks show the numeric IGDB id only.
+      UTG does not sell games. Catalog and AI data in the app can be wrong.
+    </p>
+  </article>
+</Base>

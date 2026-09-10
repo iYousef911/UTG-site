@@ -1,0 +1,30 @@
+---
+import { readFileSync } from "node:fs";
+import { join } from "node:path";
+import Base from "../layouts/Base.astro";
+
+interface Props {
+  title: string;
+  description: string;
+  path: string;
+  current?: string;
+  kicker: string;
+  heading: string;
+  lede?: string;
+  updated?: string;
+  file: string;
+}
+
+const { title, description, path, current, kicker, heading, lede, updated, file } = Astro.props;
+const html = readFileSync(join(process.cwd(), "src/content", file), "utf8");
+---
+
+<Base title={title} description={description} path={path} current={current}>
+  <div class="wrap page-hero">
+    <p class="kicker">{kicker}</p>
+    <h1>{heading}</h1>
+    {lede && <p>{lede}</p>}
+    {updated && <p class="updated">{updated}</p>}
+  </div>
+  <article class="wrap legal" set:html={html} />
+</Base>

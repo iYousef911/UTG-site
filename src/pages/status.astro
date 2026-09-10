@@ -1,0 +1,26 @@
+---
+import Base from "../layouts/Base.astro";
+---
+
+<Base title="Status" description="Systems UTG depends on. This is not a live dashboard." path="/status">
+  <div class="wrap page-hero">
+    <p class="kicker">Status</p>
+    <h1>Systems we depend on</h1>
+    <p>This is not a live dashboard. If a provider below is degraded, the matching UTG feature may fail even when this website is up.</p>
+  </div>
+  <section class="wrap section">
+    <ul class="status-list">
+      <li><span class="dot" aria-hidden="true"></span><div><strong>Apple App Store &amp; In-App Purchase</strong>Download, restore, and UTG Pro+ billing.</div></li>
+      <li><span class="dot" aria-hidden="true"></span><div><strong>Apple Push Notification service</strong>Release and related alerts.</div></li>
+      <li><span class="dot" aria-hidden="true"></span><div><strong>Apple iCloud</strong>Collections sync.</div></li>
+      <li><span class="dot" aria-hidden="true"></span><div><strong>Sign in with Apple / Google Sign-In / Firebase Authentication</strong>Optional accounts.</div></li>
+      <li><span class="dot" aria-hidden="true"></span><div><strong>IGDB</strong>Game catalog and metadata.</div></li>
+      <li><span class="dot" aria-hidden="true"></span><div><strong>CheapShark / Steam storefront data</strong>Price tracking.</div></li>
+      <li><span class="dot" aria-hidden="true"></span><div><strong>RevenueCat</strong>Subscription entitlement status for Pro+.</div></li>
+      <li><span class="dot" aria-hidden="true"></span><div><strong>AI inference provider</strong>Recommendations, chat, Buy/Wait.</div></li>
+      <li><span class="dot" aria-hidden="true"></span><div><strong>Weather &amp; map providers</strong>Local play features when location is allowed.</div></li>
+      <li><span class="dot" aria-hidden="true"></span><div><strong>This website host</strong>Marketing and legal pages only — not the app binary.</div></li>
+    </ul>
+    <p class="fine">For app issues, email <a class="mail" href="mailto:yad3v.dev@gmail.com">yad3v.dev@gmail.com</a>. For Apple outages, check Apple’s system status pages.</p>
+  </section>
+</Base>

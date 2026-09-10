@@ -1,0 +1,23 @@
+---
+import Base from "../layouts/Base.astro";
+---
+
+<Base title="Security" description="How UTG handles payments, accounts, and vulnerability reports. Contact yad3v.dev@gmail.com." path="/security">
+  <div class="wrap page-hero">
+    <p class="kicker">Trust</p>
+    <h1>Security</h1>
+    <p>Practical measures — not a list of certificates we did not earn.</p>
+  </div>
+  <article class="wrap legal">
+    <h2>Payments</h2>
+    <p>UTG Pro+ is an Apple In-App Purchase. Card numbers are entered in Apple’s sheet, not in our web forms. This site has no checkout.</p>
+    <h2>Accounts</h2>
+    <p>Sign-in is optional. When you use it, authentication is Sign in with Apple, Google Sign-In, or Firebase Authentication. Collections that sync with iCloud use Apple’s iCloud security model.</p>
+    <h2>This website</h2>
+    <p>Static files over HTTPS. No admin CMS, no WordPress, no card forms. Server logs are whatever the host keeps by default. Page analytics go to our own Umami instance.</p>
+    <h2>AI and chat</h2>
+    <p>Do not paste secrets into the assistant. Treat outputs as untrusted text. Catalog and AI data can be wrong.</p>
+    <h2>Report a vulnerability</h2>
+    <p>Email <a class="mail" href="mailto:yad3v.dev@gmail.com">yad3v.dev@gmail.com</a> with a responsible-disclosure write-up (what, where, how to reproduce, impact). Give us a reasonable window before public detail. We do not publish a paid bug-bounty table on this page.</p>
+  </article>
+</Base>

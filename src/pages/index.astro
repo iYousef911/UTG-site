@@ -1,0 +1,160 @@
+---
+import Base from "../layouts/Base.astro";
+import StoreBadge from "../components/StoreBadge.astro";
+import HeroDevices from "../components/HeroDevices.astro";
+import Faq from "../components/Faq.astro";
+import { SITE } from "../config";
+
+const faqs = [
+  {
+    q: "Is it free?",
+    a: "Yes to download. You can browse IGDB, follow three games, keep iCloud collections, and use limited AI tries at no charge. UTG Pro+ is optional and billed by Apple as an In-App Purchase. We do not store payment cards.",
+  },
+  {
+    q: "Do I need an account?",
+    a: "No. Sign-in is optional and skippable in onboarding. An account (Apple, Google, or Firebase) is there if you want that layer. Collections still sync with the iCloud on the Apple ID signed into the device.",
+  },
+  {
+    q: "Does it work offline?",
+    a: "Followed lists stored on the device or in iCloud can still be there without a signal. Live catalog, prices, giveaways, AI, and push alerts need an internet connection.",
+  },
+  {
+    q: "How do notifications work?",
+    a: "Follow a game, allow notifications when iOS asks (or later in Settings). We send release reminders for what you follow. Turn them off anytime: iOS Settings → Notifications → UTG.",
+  },
+  {
+    q: "How do I cancel Pro+?",
+    a: 'iOS Settings → [your name] → Subscriptions → UTG Pro+ → Cancel Subscription. Apple handles the charge and the cancel. Deleting the app or your UTG account does not cancel billing. Details: <a href="/subscription">Subscription Terms</a>.',
+  },
+];
+---
+
+<Base
+  title={SITE.name}
+  description={SITE.sub}
+  path="/"
+  current="/"
+  preload="/assets/hero-widgets.png"
+  jsonLd={{
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    name: SITE.name,
+    operatingSystem: "iOS 18",
+    applicationCategory: "EntertainmentApplication",
+    description: SITE.sub,
+    offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+    downloadUrl: SITE.appStore,
+    author: { "@type": "Organization", name: SITE.legalName },
+  }}
+>
+  <section class="wrap hero-split">
+    <div>
+      <img class="hero-icon" src="/assets/app-icon-128.png" width="56" height="56" alt="UTG app icon" />
+      <p class="kicker">iOS 18+ · App Store</p>
+      <h1>{SITE.tagline}</h1>
+      <p class="lede">{SITE.sub}</p>
+      <div class="hero-actions">
+        <StoreBadge />
+        <a class="btn btn-ghost" href="#how-it-works">How it works</a>
+      </div>
+      <p class="fine">
+        Free to download. Optional UTG Pro+ via Apple In-App Purchase. We never see your card number — Apple handles billing.
+      </p>
+    </div>
+    <HeroDevices />
+  </section>
+
+  <section class="wrap section" id="before-after">
+    <p class="kicker">The shift</p>
+    <h2>Before / after</h2>
+    <p class="intro">Same problem most of us already have. UTG is built for the after.</p>
+    <div class="before-after">
+      <article>
+        <p class="kicker">Before</p>
+        <h3>Scattered lists</h3>
+        <p>Wishlist in one store, a Notes screenshot, a Discord ping, a calendar you forgot to open. Launches still slip. Sales still pass.</p>
+      </article>
+      <article class="after">
+        <p class="kicker">After</p>
+        <h3>A 3-game watchlist</h3>
+        <p>Pick three titles you actually care about. See the dates. Get alerts. Free users start there; Pro+ lifts the follow cap when the list grows.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="wrap section" id="how-it-works">
+    <p class="kicker">Loop</p>
+    <h2>How it works</h2>
+    <p class="intro">Browse. Follow. Get told. That is the whole product.</p>
+    <div class="loop">
+      <article>
+        <h3>Browse IGDB</h3>
+        <p>Search and open games from the IGDB catalog. Platform and genre filters cut the noise so you are looking at a date, not a rumor thread.</p>
+      </article>
+      <article>
+        <h3>Follow / favorite</h3>
+        <p>Follow or favorite what you mean to play. Free accounts can follow 3 games. Collections sync with iCloud on your Apple devices.</p>
+      </article>
+      <article>
+        <h3>Get notified</h3>
+        <p>Allow notifications and we remind you about releases you follow. Turn them off in iOS Settings anytime. Live catalog and alerts need a network connection.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="wrap section" id="features">
+    <p class="kicker">On the deck</p>
+    <h2>What you actually get</h2>
+    <p class="intro">Honest limits. No invented awards. Full write-up on <a href="/features">Features</a>.</p>
+    <div class="grid grid-2">
+      <article class="card">
+        <p class="pill pill-free">Free: 3 follows</p>
+        <h3>Upcoming releases</h3>
+        <p>Follow dates for games you care about. Free users can follow three. UTG Pro+ removes that cap so the watchlist can grow without dropping titles.</p>
+      </article>
+      <article class="card">
+        <p class="pill">Pro+ for full tools</p>
+        <h3>Price tracking / Buy or Wait</h3>
+        <p>See whether a price looks like a historical low or a “buy now” moment. Full price tools are UTG Pro+. UTG does not sell games and does not store payment cards.</p>
+      </article>
+      <article class="card">
+        <p class="pill pill-free">On-device + iCloud</p>
+        <h3>Collections with iCloud</h3>
+        <p>Lists stay on your devices and in your iCloud. We do not sell your game list and we do not share it for advertising.</p>
+      </article>
+      <article class="card">
+        <p class="pill">Limited free tries</p>
+        <h3>Game advisor + chat</h3>
+        <p>Ask for a recommendation or a second opinion. Free use is limited tries; then UTG Pro+. Do not paste passwords or personal data into chat. Outputs can be wrong.</p>
+      </article>
+      <article class="card">
+        <p class="pill pill-free">Included</p>
+        <h3>Free catalogs</h3>
+        <p>Scan Epic free promotions, Game Pass listings, and giveaways in one place. Offers depend on the store and your region.</p>
+      </article>
+      <article class="card">
+        <p class="pill pill-free">Optional</p>
+        <h3>Weather, map, widgets, Watch</h3>
+        <p>When-in-use location for weather and nearby stores if you allow it. Deny it and the rest still works. Home Screen widgets and Apple Watch complications countdown the next followed release.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="wrap section" id="pro">
+    <div class="cta-band">
+      <div>
+        <h2>UTG Pro+ when the free three are not enough</h2>
+        <p>
+          Unlimited follows, full price tools, and more AI after the free tries. Optional Apple In-App Purchase — weekly, monthly, or annual. Soft pass: stay on the free watchlist if three games is plenty.
+        </p>
+      </div>
+      <a class="btn btn-primary" href="/pricing">See pricing</a>
+    </div>
+  </section>
+
+  <section class="wrap section" id="faq">
+    <p class="kicker">FAQ</p>
+    <h2>Straight answers</h2>
+    <Faq items={faqs} />
+  </section>
+</Base>

@@ -1,0 +1,39 @@
+---
+interface Props {
+  src?: string;
+  alt: string;
+  caption: string;
+  variant: "a" | "b" | "c";
+  placeholder?: string;
+  loading?: "eager" | "lazy";
+  fetchpriority?: "high" | "low" | "auto";
+}
+
+const { src, alt, caption, variant, placeholder, loading = "lazy", fetchpriority = "auto" } = Astro.props;
+---
+
+<figure class:list={["phone", `phone-${variant}`]}>
+  <span class="phone-island" aria-hidden="true"></span>
+  <div class="phone-screen">
+    {
+      src ? (
+        <img
+          src={src}
+          width="390"
+          height="844"
+          alt={alt}
+          loading={loading}
+          decoding="async"
+          fetchpriority={fetchpriority}
+        />
+      ) : (
+        <div class="placeholder-shot">
+          <strong>{caption}</strong>
+          <span>Screenshot not on this site yet.</span>
+          <code>{placeholder}</code>
+        </div>
+      )
+    }
+  </div>
+  <figcaption>{caption}</figcaption>
+</figure>

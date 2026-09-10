@@ -1,0 +1,17 @@
+---
+import Base from "../layouts/Base.astro";
+import OpenInApp from "../components/OpenInApp.astro";
+---
+
+<Base
+  title="Game"
+  description="Open this IGDB game in UTG – Up To Game Pro. App Store fallback if the app is not installed."
+  path="/game"
+  bannerFromLocation
+>
+  <OpenInApp
+    kind="game"
+    title="Game"
+    lede="Universal Link fallback for an IGDB title. The website does not load catalog data unless an IGDB API key is provided at build time."
+  />
+</Base>

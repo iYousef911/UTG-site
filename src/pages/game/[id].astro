@@ -1,0 +1,24 @@
+---
+import Base from "../../layouts/Base.astro";
+import OpenInApp from "../../components/OpenInApp.astro";
+
+export function getStaticPaths() {
+  return [{ params: { id: "1942" } }];
+}
+
+const { id } = Astro.params;
+const igdbId = id ?? "1942";
+---
+
+<Base
+  title={`IGDB ${igdbId}`}
+  description={`Open IGDB game ${igdbId} in UTG – Up To Game Pro. App Store fallback if the app is not installed.`}
+  path={`/game/${igdbId}`}
+>
+  <OpenInApp
+    kind="game"
+    id={igdbId}
+    title={`IGDB ${igdbId}`}
+    lede="This is a Universal Link fallback. UTG can open this IGDB id. Catalog names are not loaded on the website."
+  />
+</Base>

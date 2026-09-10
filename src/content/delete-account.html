@@ -1,0 +1,33 @@
+<div class="callout">
+      <strong>This request does not cancel UTG Pro+.</strong> You must cancel in Apple Subscriptions (iOS / iPadOS Settings → Apple ID → Subscriptions) or Apple will keep billing. See <a href="/subscription">Subscription Terms</a>.
+    </div>
+
+    <h2>What is deleted</h2>
+    <p>When we complete a deletion request, we delete what we can reach on our side:</p>
+    <ul>
+      <li>The <strong>Firebase Authentication</strong> account for that login</li>
+      <li><strong>Profile</strong> data we store for that account</li>
+      <li><strong>Cloud collections we can reach</strong> that are tied to that account (not Apple-only iCloud records we cannot access from our servers)</li>
+      <li>The <strong>OneSignal</strong> player / subscription association we hold for that user or device token, so we stop targeting that ID</li>
+    </ul>
+    <p>We also revoke Sign in with Apple tokens as Apple requires when you delete the account or when Apple notifies us that you stopped using Apple ID with UTG.</p>
+
+    <h2>What remains</h2>
+    <ul>
+      <li><strong>App Store receipts</strong> and UTG Pro+ billing records — those stay with <strong>Apple</strong></li>
+      <li><strong>Device-only data</strong> until you delete the app (on-device cache, widgets, local preferences)</li>
+      <li><strong>Some backups</strong> (for example iCloud/device backups of the app container, and processor logs kept for a limited time under their policies)</li>
+      <li>Follows / collections stored only in <strong>your iCloud</strong> (CloudKit) until you clear them in the app or in iCloud settings — we cannot empty your iCloud from this website</li>
+    </ul>
+
+    <h2>Steps</h2>
+    <ol>
+      <li>
+        <strong>Start the request.</strong> Open <strong>UTG → Settings → Account → Delete account</strong> if that control is in your version.
+        <p>If in-app delete is not shipped yet (or you cannot sign in), email <a class="mail" href="mailto:yad3v.dev@gmail.com?subject=Delete%20my%20UTG%20account">yad3v.dev@gmail.com</a> from the <strong>Apple ID Hide My Email / Google email</strong> on the account, with the subject line <strong>Delete my UTG account</strong>. Say you want the Firebase account, profile, reachable cloud collections, and OneSignal association deleted.</p>
+      </li>
+      <li><strong>We delete within 30 days</strong> of a verified request (sooner when we can). We may email to confirm it is you. Legal holds can extend retention where the law requires.</li>
+      <li><strong>Uninstall UTG</strong> if you want device-only data gone, and <strong>disable or delete UTG iCloud data</strong> in iOS Settings → [your name] → iCloud if you want those lists off Apple’s iCloud as well. Optionally: Settings → Sign-In &amp; Security → Sign in with Apple → UTG → Stop Using Apple ID.</li>
+    </ol>
+
+    <p>Privacy: <a href="/privacy">Privacy Policy</a>. Help: <a href="/support">Support</a>. Contact: <a class="mail" href="mailto:yad3v.dev@gmail.com">yad3v.dev@gmail.com</a>.</p>

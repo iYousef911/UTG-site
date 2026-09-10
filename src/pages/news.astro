@@ -1,0 +1,17 @@
+---
+import Base from "../layouts/Base.astro";
+import OpenInApp from "../components/OpenInApp.astro";
+---
+
+<Base
+  title="News"
+  description="Open news in UTG – Up To Game Pro."
+  path="/news"
+  bannerFromLocation
+>
+  <OpenInApp
+    kind="news"
+    title="News"
+    lede="News in the UTG app. If this URL includes an item id, Open in UTG points at that item."
+  />
+</Base>

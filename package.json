@@ -1,0 +1,16 @@
+{
+  "name": "utg-site",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev --host 127.0.0.1 --port 4321",
+    "build": "astro build",
+    "preview": "astro preview --host 127.0.0.1 --port 4321",
+    "serve": "HOST=127.0.0.1 node scripts/serve-dist.mjs",
+    "start": "node scripts/serve-dist.mjs"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "^3.4.2",
+    "astro": "^5.13.2"
+  }
+}

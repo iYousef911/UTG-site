@@ -1,0 +1,124 @@
+---
+import { SITE } from "../config";
+
+interface Props {
+  kind: "game" | "news" | "deal" | "screen";
+  screen?: string;
+  id?: string;
+  title: string;
+  lede: string;
+}
+
+const { kind, screen = "", id = "", title, lede } = Astro.props;
+const gamedb =
+  kind === "game" && id
+    ? `gamedb://game/${id}`
+    : kind === "news" && id
+      ? `gamedb://news/${id}`
+      : kind === "deal" && id
+        ? `gamedb://deals/${id}`
+        : screen
+          ? `gamedb://${screen}`
+          : "gamedb://";
+---
+
+<div class="wrap page-hero open-in" data-kind={kind} data-screen={screen} data-id={id}>
+  <img class="hero-icon" src="/assets/app-icon-128.png" width="56" height="56" alt="UTG app icon" />
+  <p class="kicker">Open in UTG</p>
+  <h1 data-title>{title}</h1>
+  <p data-lede>{lede}</p>
+  {
+    kind !== "screen" && (
+      <dl class="dl-row">
+        <div>
+          <dt>{kind === "game" ? "IGDB id" : kind === "news" ? "News id" : "Deal id"}</dt>
+          <dd>
+            <code data-id-value>{id || "—"}</code>
+          </dd>
+        </div>
+        <div>
+          <dt>App route</dt>
+          <dd>
+            <code data-gamedb>{gamedb}</code>
+          </dd>
+        </div>
+      </dl>
+    )
+  }
+  {
+    kind === "screen" && (
+      <p class="fine">
+        App route: <code data-gamedb>{gamedb}</code>
+      </p>
+    )
+  }
+  <div class="hero-actions">
+    <a class="btn btn-primary" data-open href={gamedb}>Open in UTG</a>
+    <a class="btn btn-ghost" href="/download">Get the app</a>
+  </div>
+  <p class="fine" style="margin-top:1rem">
+    If the app is installed, that button uses the <code>gamedb://</code> scheme. If nothing opens, use the App Store — we never scrape a game page here unless an IGDB key is configured on the build.
+  </p>
+  <a class="store-badge" href={SITE.appStore} style="margin-top:1rem;display:inline-block">
+    <img src="/img/app-store-badge.png" width="120" height="40" alt="Download on the App Store" />
+  </a>
+</div>
+
+<script>
+  const root = document.querySelector(".open-in");
+  if (root instanceof HTMLElement) {
+    const kind = root.dataset.kind ?? "";
+    const parts = location.pathname.replace(/\/+$/, "").split("/").filter(Boolean);
+    let id = root.dataset.id || "";
+    if ((kind === "game" || kind === "news" || kind === "deal") && !id) {
+      id = parts[1] ?? "";
+    }
+    const valid = /^\d+$/.test(id);
+    const scheme =
+      kind === "game"
+        ? valid
+          ? `gamedb://game/${id}`
+          : "gamedb://"
+        : kind === "news"
+          ? valid
+            ? `gamedb://news/${id}`
+            : parts.length === 1
+              ? "gamedb://news"
+              : "gamedb://"
+          : kind === "deal"
+            ? valid
+              ? `gamedb://deals/${id}`
+              : parts.length === 1
+                ? "gamedb://deals"
+                : "gamedb://"
+            : `gamedb://${root.dataset.screen || ""}`;
+
+    const idEl = root.querySelector("[data-id-value]");
+    const gamedbEl = root.querySelector("[data-gamedb]");
+    const openEl = root.querySelector("[data-open]");
+    const titleEl = root.querySelector("[data-title]");
+    const ledeEl = root.querySelector("[data-lede]");
+
+    if (kind === "game") {
+      if (valid) {
+        if (idEl) idEl.textContent = id;
+        if (titleEl) titleEl.textContent = `IGDB ${id}`;
+        if (ledeEl) {
+          ledeEl.textContent =
+            "This is a Universal Link fallback. UTG can open this IGDB id. Catalog names are not loaded on the website.";
+        }
+      } else if (titleEl && ledeEl) {
+        titleEl.textContent = "Game link";
+        ledeEl.textContent = "Add a numeric IGDB id, for example /game/1942.";
+      }
+    }
+
+    const meta = root.querySelector(".dl-row");
+    if ((kind === "news" || kind === "deal") && !valid && meta instanceof HTMLElement) {
+      meta.hidden = true;
+    }
+
+    if (gamedbEl) gamedbEl.textContent = scheme;
+    if (openEl instanceof HTMLAnchorElement) openEl.href = scheme;
+  }
+</script>

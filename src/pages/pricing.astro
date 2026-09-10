@@ -1,0 +1,95 @@
+---
+import Base from "../layouts/Base.astro";
+import StoreBadge from "../components/StoreBadge.astro";
+---
+
+<Base
+  title="Pricing"
+  description="Free UTG vs UTG Pro+: 3 follows vs unlimited, limited AI vs more AI, Buy/Wait and price history. Apple In-App Purchase. Cancel in Apple ID settings."
+  path="/pricing"
+  current="/pricing"
+>
+  <div class="wrap page-hero">
+    <p class="kicker">Pricing</p>
+    <h1>Free watchlist. Pro+ when three is not enough.</h1>
+    <p>No checkout on this website. UTG Pro+ is an Apple In-App Purchase. Cancel in Apple ID settings — not here. We never see your card number.</p>
+  </div>
+
+  <section class="wrap section">
+    <h2>Free vs UTG Pro+</h2>
+    <p class="intro">The in-app paywall is the source of truth if a later version gates something differently. Soft pass: three games is enough.</p>
+    <div style="overflow-x:auto">
+      <table class="compare">
+        <thead>
+          <tr>
+            <th>Feature</th>
+            <th>Free</th>
+            <th>UTG Pro+</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Follow limit</td>
+            <td>3 games</td>
+            <td>Unlimited</td>
+          </tr>
+          <tr>
+            <td>AI advisor + chat</td>
+            <td>Limited free tries</td>
+            <td>More AI after the free tries, while subscribed</td>
+          </tr>
+          <tr>
+            <td>Buy/Wait and price history</td>
+            <td>Not the full tools</td>
+            <td>Full price tools</td>
+          </tr>
+          <tr>
+            <td>IGDB browse, iCloud collections, optional sign-in</td>
+            <td>Included</td>
+            <td>Included</td>
+          </tr>
+          <tr>
+            <td>Epic / Game Pass / giveaways scan</td>
+            <td>Included</td>
+            <td>Included</td>
+          </tr>
+          <tr>
+            <td>Widgets + Apple Watch countdown</td>
+            <td>Included</td>
+            <td>Included</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="fine">We do <strong>not</strong> claim that Pro+ is ad-free. Ads, if shown, follow the <a href="/privacy">Privacy Policy</a> (including Google Mobile Ads and ATT).</p>
+  </section>
+
+  <section class="wrap section">
+    <h2>What Apple bills</h2>
+    <p class="intro">Lengths and product IDs. The price you pay is the one Apple shows in your storefront — it can vary by country.</p>
+    <div style="overflow-x:auto">
+      <table class="compare">
+        <thead>
+          <tr><th>Length</th><th>Product ID</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Weekly</td><td><code>utgutgp_0199_1w</code></td></tr>
+          <tr><td>Monthly</td><td><code>utgutgp_0099_1m</code></td></tr>
+          <tr><td>Annual</td><td><code>utgutgp_0999_1y</code></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p>Subscribe or restore inside the app, signed into the Apple ID that should own the purchase.</p>
+  </section>
+
+  <section class="wrap section">
+    <div class="cta-band">
+      <div>
+        <h2>How to cancel</h2>
+        <p>iOS Settings → [your name] → Subscriptions → UTG Pro+ → Cancel Subscription. Deleting the app does not cancel billing. Restore is in the app, not on this site.</p>
+      </div>
+      <StoreBadge />
+    </div>
+    <p>Legal: <a href="/terms">Terms of Use (EULA)</a> · <a href="/privacy">Privacy Policy</a> · <a href="/subscription">Subscription Terms</a></p>
+  </section>
+</Base>

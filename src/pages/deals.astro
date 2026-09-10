@@ -1,0 +1,17 @@
+---
+import Base from "../layouts/Base.astro";
+import OpenInApp from "../components/OpenInApp.astro";
+---
+
+<Base
+  title="Deals"
+  description="Open deals in UTG – Up To Game Pro. UTG does not sell games."
+  path="/deals"
+  bannerFromLocation
+>
+  <OpenInApp
+    kind="deal"
+    title="Deals"
+    lede="Price and deal screens in the app. UTG does not sell games. If this URL includes an id, Open in UTG points at that deal."
+  />
+</Base>

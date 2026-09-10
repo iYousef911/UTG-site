@@ -1,0 +1,63 @@
+---
+import Base from "../layouts/Base.astro";
+import { SITE } from "../config";
+---
+
+<Base
+  title="Support"
+  description={`Email ${SITE.email} for UTG support. Notifications, iCloud, AI and follow limits, restore purchases, Steam public profile. No phone support.`}
+  path="/support"
+  current="/support"
+>
+  <div class="wrap page-hero">
+    <p class="kicker">Support</p>
+    <h1>Email is the support channel</h1>
+    <p>There is no phone support. Include your iOS version, device, and — for account issues — the Apple / Google email you signed in with.</p>
+  </div>
+
+  <section class="wrap legal" style="padding-top:1.5rem">
+    <form class="support-form" id="support-form">
+      <p>Opens your mail app to <a class="mail" href={`mailto:${SITE.email}`}>{SITE.email}</a>. Nothing is stored on this server.</p>
+      <label for="ios">iOS / iPadOS version</label>
+      <input id="ios" name="ios" type="text" autocomplete="off" placeholder="e.g. iOS 18.5" />
+      <label for="device">Device</label>
+      <input id="device" name="device" type="text" autocomplete="off" placeholder="e.g. iPhone 16" />
+      <label for="message">What happened</label>
+      <textarea id="message" name="message" required placeholder="What you expected, what you saw."></textarea>
+      <div class="hero-actions">
+        <button class="btn btn-primary" type="submit">Open mail app</button>
+      </div>
+      <p class="fine">We aim to reply within 3 business days. We cannot refund Apple charges or reset your Apple ID from this site.</p>
+    </form>
+
+    <h2>Common fixes</h2>
+    <ul>
+      <li><strong>Notifications off.</strong> iOS Settings → Notifications → UTG → allow alerts. In the app, confirm you actually follow the game you expected an alert for.</li>
+      <li><strong>iCloud collections not syncing.</strong> Same Apple ID on each device. Wait on Wi-Fi, force-quit and reopen UTG. Collections live in CloudKit, not on this website.</li>
+      <li><strong>AI limit.</strong> Free users get limited advisor/chat tries; then UTG Pro+. That is expected. See <a href="/pricing">pricing</a>.</li>
+      <li><strong>Follow limit.</strong> Free plan is <strong>3</strong> followed games. Unfollow one or subscribe to Pro+ for unlimited follows.</li>
+      <li><strong>Restore purchases.</strong> In the app (paywall or Settings) tap Restore purchases while signed into the same Apple ID that bought Pro+.</li>
+      <li><strong>Steam backlog empty.</strong> The Steam profile must be <strong>public</strong>, including game details on Steam.</li>
+    </ul>
+
+    <h2>How to cancel</h2>
+    <p>Settings → [your name] → Subscriptions → UTG Pro+ → Cancel Subscription. <a href="/subscription">Subscription Terms</a>.</p>
+
+    <h2>How to delete your account</h2>
+    <p>Optional accounts only. Follow <a href="/delete-account">Delete account</a>. That does not cancel Pro+.</p>
+    <p>Refunds: Apple only — <a href="https://reportaproblem.apple.com">reportaproblem.apple.com</a>.</p>
+  </section>
+</Base>
+
+<script>
+  const form = document.getElementById("support-form");
+  form?.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const ios = (document.getElementById("ios") as HTMLInputElement | null)?.value.trim() ?? "";
+    const device = (document.getElementById("device") as HTMLInputElement | null)?.value.trim() ?? "";
+    const message = (document.getElementById("message") as HTMLTextAreaElement | null)?.value.trim() ?? "";
+    const body = [`iOS: ${ios || "(not given)"}`, `Device: ${device || "(not given)"}`, "", message].join("\n");
+    const url = `mailto:yad3v.dev@gmail.com?subject=${encodeURIComponent("UTG support")}&body=${encodeURIComponent(body)}`;
+    window.location.href = url;
+  });
+</script>

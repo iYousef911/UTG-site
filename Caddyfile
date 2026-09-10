@@ -1,0 +1,44 @@
+{
+	admin off
+}
+
+# Behind Coolify / Hostinger Caddy (TLS on the proxy). Listen on :80 only.
+:80 {
+	root * /srv
+	encode gzip zstd
+
+	header X-Content-Type-Options nosniff
+	header Referrer-Policy "strict-origin-when-cross-origin"
+	header X-Frame-Options SAMEORIGIN
+	header Permissions-Policy "camera=(), microphone=(), geolocation=()"
+
+	# Apple fetches this URL and does not follow redirects.
+	handle /.well-known/apple-app-site-association {
+		header Content-Type application/json
+		header Cache-Control "public, max-age=3600"
+		rewrite * /.well-known/apple-app-site-association.json
+		file_server
+	}
+
+	handle /apple-app-site-association {
+		header Content-Type application/json
+		header Cache-Control "public, max-age=3600"
+		rewrite * /.well-known/apple-app-site-association.json
+		file_server
+	}
+
+	@gameId path_regexp ^/game/[0-9]+$
+	rewrite @gameId /game.html
+	@newsId path_regexp ^/news/[0-9]+$
+	rewrite @newsId /news.html
+	@dealId path_regexp ^/deals/[0-9]+$
+	rewrite @dealId /deals.html
+
+	try_files {path} {path}.html
+	file_server
+
+	handle_errors {
+		rewrite * /404.html
+		file_server
+	}
+}

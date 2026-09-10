@@ -1,0 +1,12 @@
+/* TEAM */
+Operator: Yad3V
+Contact: yad3v.dev@gmail.com
+Location: Saudi Arabia
+
+/* SITE */
+Last update: 2026/09/03
+Language: English
+Standards: HTML5, CSS3
+Doctype: HTML5
+Software: Static files for Hostinger public_html
+App: UTG – Up To Game Pro (iOS, App Store ID 1480143119)

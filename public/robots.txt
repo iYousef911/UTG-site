@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+# https → gamedb:// map (and iOS Universal Link notes)
+# https://utg.yadev.tech/llms.txt
+
+Sitemap: https://utg.yadev.tech/sitemap-index.xml

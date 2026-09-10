@@ -1,0 +1,22 @@
+---
+import Base from "../layouts/Base.astro";
+import StoreBadge from "../components/StoreBadge.astro";
+---
+
+<Base title="Page not found" description="No page at this URL on the UTG site." path="/404">
+  <div class="wrap gone">
+    <p class="kicker">404</p>
+    <h1>Missed the spawn</h1>
+    <p class="lede" style="margin-inline:auto">
+      No page at this URL. The app and the legal pages are still here — they were not moved behind a popup.
+    </p>
+    <div class="hero-actions">
+      <a class="btn btn-primary" href="/download">Get the app</a>
+      <a class="btn btn-ghost" href="/">Home</a>
+    </div>
+    <StoreBadge />
+    <p class="fine" style="margin-top:1.25rem">
+      Looking for a game? Use <code>/game/&#123;igdb-id&#125;</code>, for example <a href="/game/1942">/game/1942</a>.
+    </p>
+  </div>
+</Base>

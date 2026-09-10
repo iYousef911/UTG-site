@@ -1,0 +1,87 @@
+---
+import "../styles/global.css";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { SITE } from "../config";
+
+interface Props {
+  title: string;
+  description: string;
+  path: string;
+  current?: string;
+  /** Apache internally rewrites some app paths; set banner from the address bar. */
+  bannerFromLocation?: boolean;
+  jsonLd?: Record<string, unknown>;
+  preload?: string;
+}
+
+const { title, description, path, current, bannerFromLocation = false, jsonLd, preload } = Astro.props;
+const canonical = path === "/" ? `${SITE.url}/` : `${SITE.url}${path}`;
+const pageTitle = title === SITE.name ? title : `${title} — UTG`;
+const banner = `app-id=${SITE.appId}, app-argument=${canonical}`;
+---
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    {
+      bannerFromLocation ? (
+        <script is:inline>
+          (function () {
+            var url = location.origin + location.pathname.replace(/\/+$/, "");
+            document.write('<link rel="canonical" href="' + url + '">');
+            document.write(
+              '<meta name="apple-itunes-app" content="app-id=1480143119, app-argument=' + url + '">'
+            );
+          })();
+        </script>
+      ) : (
+        <>
+          <link rel="canonical" href={canonical} />
+          <meta name="apple-itunes-app" content={banner} />
+        </>
+      )
+    }
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" href="/favicon.png?v=4" type="image/png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=4" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="preload" href="/fonts/outfit-latin.woff2" as="font" type="font/woff2" crossorigin />
+    {preload && <link rel="preload" href={preload} as="image" />}
+    <link rel="preconnect" href="https://umami.yadev.tech" crossorigin />
+    <script
+      defer
+      src={SITE.umamiSrc}
+      data-website-id={SITE.umamiId}
+      data-domains="utg.yadev.tech"
+      data-do-not-track="true"></script>
+    <meta name="theme-color" content="#07080a" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={SITE.name} />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={`${SITE.url}/img/og.png`} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={`${SITE.url}/img/og.png`} />
+    {
+      jsonLd && (
+        <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+      )
+    }
+  </head>
+  <body>
+    <a class="skip-link" href="#content">Skip to content</a>
+    <Header current={current} />
+    <main id="content">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

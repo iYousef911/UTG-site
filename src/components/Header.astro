@@ -1,0 +1,51 @@
+---
+import { NAV } from "../config";
+
+interface Props {
+  current?: string;
+}
+
+const { current } = Astro.props;
+const path = Astro.url.pathname.replace(/\/$/, "") || "/";
+---
+
+<header class="site-header">
+  <div class="header-inner">
+    <a class="logo" href="/" aria-current={path === "/" ? "page" : undefined}>
+      <img class="logo-mark" src="/assets/app-icon-128.png" width="36" height="36" alt="" />
+      <span class="logo-text"><strong>UTG</strong><span>Up To Game Pro</span></span>
+    </a>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu">
+      <span></span>
+    </button>
+    <nav class="nav" id="site-nav">
+      {
+        NAV.map((item) => (
+          <a href={item.href} aria-current={current === item.href || path === item.href ? "page" : undefined}>
+            {item.label}
+          </a>
+        ))
+      }
+      <a class="btn btn-primary" href="/download" aria-current={path === "/download" ? "page" : undefined}>Get the app</a>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const toggle = document.querySelector(".nav-toggle");
+  const nav = document.querySelector("#site-nav");
+  if (toggle instanceof HTMLButtonElement && nav instanceof HTMLElement) {
+    const setOpen = (open: boolean) => {
+      nav.classList.toggle("is-open", open);
+      toggle.setAttribute("aria-expanded", open ? "true" : "false");
+      toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+    };
+    toggle.addEventListener("click", () => setOpen(!nav.classList.contains("is-open")));
+    nav.querySelectorAll("a").forEach((link) => {
+      link.addEventListener("click", () => setOpen(false));
+    });
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") setOpen(false);
+    });
+  }
+</script>
