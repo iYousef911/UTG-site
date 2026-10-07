@@ -7,26 +7,44 @@ interface Props {
 
 const { current } = Astro.props;
 const path = Astro.url.pathname.replace(/\/$/, "") || "/";
+const isAr = path.startsWith("/ar");
+const items = isAr
+  ? [
+      { href: "/ar/download", label: "تحميل" },
+      { href: "/ar/support", label: "الدعم" },
+      { href: "/", label: "English" },
+    ]
+  : [...NAV];
 ---
 
 <header class="site-header">
   <div class="header-inner">
-    <a class="logo" href="/" aria-current={path === "/" ? "page" : undefined}>
-      <img class="logo-mark" src="/assets/app-icon-128.png" width="36" height="36" alt="" />
+    <a class="logo" href={isAr ? "/ar/download" : "/"} aria-current={path === "/" || path === "/ar/download" ? "page" : undefined}>
+      <img class="logo-mark" src="/assets/app-icon-128.webp" width="36" height="36" alt="" />
       <span class="logo-text"><strong>UTG</strong><span>Up To Game Pro</span></span>
     </a>
-    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label="Open menu">
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="site-nav" aria-label={isAr ? "فتح القائمة" : "Open menu"}>
       <span></span>
     </button>
     <nav class="nav" id="site-nav">
       {
-        NAV.map((item) => (
+        items.map((item) => (
           <a href={item.href} aria-current={current === item.href || path === item.href ? "page" : undefined}>
             {item.label}
           </a>
         ))
       }
-      <a class="btn btn-primary" href="/download" aria-current={path === "/download" ? "page" : undefined}>Get the app</a>
+      {
+        isAr ? (
+          <a class="btn btn-primary" href="/ar/download" aria-current={path === "/ar/download" ? "page" : undefined}>
+            حمّل التطبيق
+          </a>
+        ) : (
+          <a class="btn btn-primary" href="/download" aria-current={path === "/download" ? "page" : undefined}>
+            Get the app
+          </a>
+        )
+      }
     </nav>
   </div>
 </header>
@@ -38,7 +56,8 @@ const path = Astro.url.pathname.replace(/\/$/, "") || "/";
     const setOpen = (open: boolean) => {
       nav.classList.toggle("is-open", open);
       toggle.setAttribute("aria-expanded", open ? "true" : "false");
-      toggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+      const ar = document.documentElement.lang === "ar";
+      toggle.setAttribute("aria-label", open ? (ar ? "إغلاق القائمة" : "Close menu") : ar ? "فتح القائمة" : "Open menu");
     };
     toggle.addEventListener("click", () => setOpen(!nav.classList.contains("is-open")));
     nav.querySelectorAll("a").forEach((link) => {

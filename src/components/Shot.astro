@@ -1,0 +1,25 @@
+---
+interface Props {
+  src: string;
+  alt: string;
+  width?: number;
+  height?: number;
+  loading?: "eager" | "lazy";
+  fetchpriority?: "high" | "low" | "auto";
+}
+
+const { src, alt, width = 390, height = 844, loading = "lazy", fetchpriority = "auto" } = Astro.props;
+const webp = src.replace(/\.png$/i, ".webp");
+const useWebp = src.toLowerCase().endsWith(".png");
+---
+
+{
+  useWebp ? (
+    <picture>
+      <source type="image/webp" srcset={webp} />
+      <img src={src} width={width} height={height} alt={alt} loading={loading} decoding="async" fetchpriority={fetchpriority} />
+    </picture>
+  ) : (
+    <img src={src} width={width} height={height} alt={alt} loading={loading} decoding="async" fetchpriority={fetchpriority} />
+  )
+}

@@ -1,12 +1,16 @@
 ---
 import Base from "../layouts/Base.astro";
+import Shot from "../components/Shot.astro";
 ---
 
-<Base title="Press" description="UTG – Up To Game Pro press boilerplate. No invented awards or download counts." path="/press">
+<Base title="Press" description="UTG – Up To Game Pro press kit: boilerplate, icon, and screenshots. No invented awards or download counts." path="/press">
   <div class="wrap page-hero">
     <p class="kicker">Press</p>
     <h1>UTG in one paragraph</h1>
     <p>Use this boilerplate. Do not invent awards, rankings, or download counts — we do not publish those figures here.</p>
+    <p>
+      <a class="btn btn-primary" href="/press/utg-press-kit.zip" download>Download press kit (zip)</a>
+    </p>
   </div>
   <article class="wrap legal">
     <h2>Boilerplate</h2>
@@ -22,8 +26,25 @@ import Base from "../layouts/Base.astro";
       <li>Operator: Yad3V, Saudi Arabia</li>
       <li>Press contact: <a class="mail" href="mailto:yad3v.dev@gmail.com">yad3v.dev@gmail.com</a></li>
     </ul>
-    <h2>Assets</h2>
-    <p>Use the app icon at <code>/assets/app-icon.png</code> and the live App Store listing artwork. Do not invent mock reviews.</p>
+    <h2>What’s in the zip</h2>
+    <p>Icon, screenshots (search, this-month list, favorites, upcoming countdown, weather, Buy or Wait), and a README with this boilerplate. Do not invent mock reviews.</p>
+    <div class="press-thumbs">
+      <figure>
+        <Shot src="/assets/app-icon.png" width={128} height={128} alt="UTG app icon" />
+      </figure>
+      <figure>
+        <Shot src="/assets/search.png" alt="Search" />
+      </figure>
+      <figure>
+        <Shot src="/assets/catalog.png" alt="Out this month" />
+      </figure>
+      <figure>
+        <Shot src="/assets/favorites.png" alt="Favorites" />
+      </figure>
+      <figure>
+        <Shot src="/assets/hero-countdown.png" alt="Upcoming countdown" />
+      </figure>
+    </div>
     <p>Legal: <a href="/privacy">Privacy</a> · <a href="/terms">Terms (EULA)</a> · <a href="/subscription">Subscriptions</a>.</p>
   </article>
 </Base>

@@ -1,6 +1,8 @@
 ---
 import Base from "../layouts/Base.astro";
 import { SITE } from "../config";
+
+const mailto = `mailto:${SITE.email}?subject=${encodeURIComponent("UTG support")}`;
 ---
 
 <Base
@@ -13,11 +15,15 @@ import { SITE } from "../config";
     <p class="kicker">Support</p>
     <h1>Email is the support channel</h1>
     <p>There is no phone support. Include your iOS version, device, and — for account issues — the Apple / Google email you signed in with.</p>
+    <p><a href="/ar/support" lang="ar" hreflang="ar">العربية — الدعم</a></p>
   </div>
 
   <section class="wrap legal" style="padding-top:1.5rem">
-    <form class="support-form" id="support-form">
-      <p>Opens your mail app to <a class="mail" href={`mailto:${SITE.email}`}>{SITE.email}</a>. Nothing is stored on this server.</p>
+    <form class="support-form" id="support-form" action={mailto} method="get">
+      <p>
+        Opens your mail app to <a class="mail" href={mailto}>{SITE.email}</a>.
+        Nothing is stored on this server. If the button does nothing, tap that address.
+      </p>
       <label for="ios">iOS / iPadOS version</label>
       <input id="ios" name="ios" type="text" autocomplete="off" placeholder="e.g. iOS 18.5" />
       <label for="device">Device</label>
@@ -26,6 +32,7 @@ import { SITE } from "../config";
       <textarea id="message" name="message" required placeholder="What you expected, what you saw."></textarea>
       <div class="hero-actions">
         <button class="btn btn-primary" type="submit">Open mail app</button>
+        <a class="btn btn-ghost" href={mailto}>Email without the form</a>
       </div>
       <p class="fine">We aim to reply within 3 business days. We cannot refund Apple charges or reset your Apple ID from this site.</p>
     </form>
@@ -56,7 +63,7 @@ import { SITE } from "../config";
     const ios = (document.getElementById("ios") as HTMLInputElement | null)?.value.trim() ?? "";
     const device = (document.getElementById("device") as HTMLInputElement | null)?.value.trim() ?? "";
     const message = (document.getElementById("message") as HTMLTextAreaElement | null)?.value.trim() ?? "";
-    const body = [`iOS: ${ios || "(not given)"}`, `Device: ${device || "(not given)"}`, "", message].join("\n");
+    const body = [`Page: /support`, `iOS: ${ios || "(not given)"}`, `Device: ${device || "(not given)"}`, "", message].join("\n");
     const url = `mailto:yad3v.dev@gmail.com?subject=${encodeURIComponent("UTG support")}&body=${encodeURIComponent(body)}`;
     window.location.href = url;
   });

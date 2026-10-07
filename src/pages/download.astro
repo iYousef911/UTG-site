@@ -1,6 +1,7 @@
 ---
 import Base from "../layouts/Base.astro";
-import StoreBadge from "../components/StoreBadge.astro";
+import StoreRow from "../components/StoreRow.astro";
+import Shot from "../components/Shot.astro";
 import { SITE } from "../config";
 ---
 
@@ -14,16 +15,17 @@ import { SITE } from "../config";
     <p class="kicker">Download</p>
     <h1>Get UTG on the App Store</h1>
     <p>iPhone and iPad, iOS 18 or later. Look for UTG – Up To Game Pro, Apple ID {SITE.appId}.</p>
+    <p><a href="/ar/download" lang="ar" hreflang="ar">العربية — صفحة التحميل</a></p>
   </div>
 
   <section class="wrap section">
     <div class="hero-actions">
-      <StoreBadge />
+      <StoreRow source="download" qr />
       <a class="btn btn-ghost" href="/support">Need help installing?</a>
     </div>
-    <p class="fine">This site does not host the IPA. Apple delivers the app.</p>
+    <p class="fine">This site does not host the IPA. Apple delivers the app. On iPhone, Safari may show the Smart App Banner. On a computer, scan the QR.</p>
     <figure class="shot" style="margin-top:1.5rem">
-      <img src="/assets/search.png" width="390" height="844" alt="UTG search and IGDB browse on iPhone" loading="lazy" decoding="async" />
+      <Shot src="/assets/search.png" alt="UTG search and IGDB browse on iPhone" loading="lazy" />
     </figure>
   </section>
 
@@ -33,10 +35,11 @@ import { SITE } from "../config";
       Safari may show Apple’s Smart App Banner at the top of this page (app-id {SITE.appId}). That banner can open UTG on the device. If the banner does not appear, use the App Store badge — it is the reliable fallback.
     </p>
     <p>
-      Universal Link fallbacks live on this domain (for example <a href="/game/1942">/game/1942</a>). The association file is at
+      Universal Links for game pages live on this domain (for example <a href="/game/1942">/game/1942</a>). The association file is at
       <a href="/.well-known/apple-app-site-association"><code>/.well-known/apple-app-site-association</code></a>.
-      The site cannot finish Universal Links by itself: the iOS app must add <code>applinks:utg.yadev.tech</code> and handle
-      <code>NSUserActivityTypeBrowsingWeb</code>. Details: <a href="/universal-links">Universal Links</a>.
+      The current iOS project already includes <code>applinks:utg.yadev.tech</code> and handles
+      <code>NSUserActivityTypeBrowsingWeb</code>. That build still has to be the one on the App Store before “Open in UTG” works from Safari.
+      Details: <a href="/universal-links">Universal Links</a>.
     </p>
   </section>
 

@@ -6,7 +6,7 @@ import { APPLE_APP_ID, ASSOCIATED_DOMAIN, UNIVERSAL_ROUTES } from "../data/unive
 
 <Base
   title="Universal Links"
-  description="How https://utg.yadev.tech maps to gamedb:// routes, and what the iOS app must still do."
+  description="How https://utg.yadev.tech maps to gamedb:// routes. The iOS project already includes Associated Domains and NSUserActivityTypeBrowsingWeb."
   path="/universal-links"
 >
   <div class="wrap page-hero">
@@ -50,15 +50,20 @@ import { APPLE_APP_ID, ASSOCIATED_DOMAIN, UNIVERSAL_ROUTES } from "../data/unive
       </tbody>
     </table>
 
-    <h2>What the iOS app must add</h2>
-    <p>The current entitlements file does not include Associated Domains. Existing <code>gamedb://</code> handling in <code>openURLContexts</code> does not receive Universal Links.</p>
+    <h2>What the iOS app already includes</h2>
+    <p>
+      The current Xcode project already has Associated Domains (<code>{ASSOCIATED_DOMAIN}</code>, plus www and ya-techno.com),
+      <code>NSUserActivityTypeBrowsingWeb</code> in Info.plist, and handlers in SceneDelegate / AppDelegate that map
+      <code>https://utg.yadev.tech/game/…</code> into the existing deep-link router. Legal and marketing paths stay in Safari.
+    </p>
+    <p>
+      Until that build is the one on the App Store, <a href="/game/1942">/game/1942</a> is still a web fallback with an
+      <strong>Open in UTG</strong> custom-scheme button — not a guaranteed Universal Link handoff.
+    </p>
     <ol class="steps">
-      <li>Xcode → Signing &amp; Capabilities → Associated Domains → add <code>{ASSOCIATED_DOMAIN}</code> (no <code>https://</code>, no path).</li>
-      <li>
-        Handle <code>NSUserActivityTypeBrowsingWeb</code>. Read <code>userActivity.webpageURL</code>, map the path to the matching
-        <code>gamedb://</code> route, then reuse the current deep-link handler.
-      </li>
-      <li>Ship that build. Apple’s CDN caches the AASA file; allow a delay after the first install or entitlement change.</li>
+      <li>Ship the build that already contains those entitlements and handlers.</li>
+      <li>Apple’s CDN caches the AASA file; allow a delay after the first install or entitlement change.</li>
+      <li>If a device still opens Safari only, delete the app, reboot, reinstall from the App Store, then try the link from Notes or Messages — not from a tab already on this domain.</li>
     </ol>
     <pre class="glance"><code>{`func scene(_ scene: UIScene, continue userActivity: NSUserActivity,
            restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {

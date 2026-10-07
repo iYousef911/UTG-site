@@ -1,0 +1,22 @@
+---
+import StoreBadge from "./StoreBadge.astro";
+
+interface Props {
+  source: string;
+  qr?: boolean;
+}
+
+const { source, qr = false } = Astro.props;
+---
+
+<div class:list={["store-row", qr && "has-qr"]}>
+  <StoreBadge source={source} />
+  {
+    qr && (
+      <aside class="store-qr">
+        <img src="/img/app-store-qr.png" width="120" height="120" alt="QR code that opens the UTG App Store page on iPhone" />
+        <p class="fine">Scan on iPhone</p>
+      </aside>
+    )
+  }
+</div>

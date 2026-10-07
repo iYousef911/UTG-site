@@ -133,19 +133,16 @@ ${rows}
 - Smart App Banner: apple-itunes-app app-id=1480143119 with app-argument = the current page URL.
 - Fallback HTML for the paths above if the app is not installed.
 
-## What the website cannot do
+## What the iOS project already includes
 
-Universal Links are incomplete until the iOS app:
+- Associated Domains: ${ASSOCIATED_DOMAIN} (plus www and ya-techno.com)
+- NSUserActivityTypeBrowsingWeb in Info.plist
+- SceneDelegate / AppDelegate map https://utg.yadev.tech paths to gamedb://
+- Marketing/legal paths stay in Safari
 
-1. Adds Associated Domains entitlement: ${ASSOCIATED_DOMAIN}
-   (apex only unless www also serves AASA with HTTP 200 and no redirect).
-2. Handles NSUserActivityTypeBrowsingWeb (userActivity.webpageURL) and maps
-   that HTTPS URL to the matching gamedb:// route.
-3. Ships a build that includes that entitlement. Existing gamedb:// handling
-   (openURLContexts) is not enough for https:// taps from Messages, Mail, or Safari.
-
-Safari on this same domain typically will not hand off to the app. Use the
-“Open in UTG” button (gamedb://) on these fallback pages.
+Until that build is the App Store binary, /game/{id} is still a web fallback
+with an Open in UTG (gamedb://) button. Safari already on this domain typically
+will not hand off; try the link from Notes or Messages after install.
 
 ## Marketing pages (not app routes)
 
@@ -153,7 +150,9 @@ Safari on this same domain typically will not hand off to the app. Use the
 - ${siteUrl}/features
 - ${siteUrl}/pricing
 - ${siteUrl}/download
+- ${siteUrl}/ar/download
 - ${siteUrl}/support
+- ${siteUrl}/ar/support
 - ${siteUrl}/privacy
 - ${siteUrl}/terms
 - ${siteUrl}/subscription

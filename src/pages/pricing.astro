@@ -1,6 +1,7 @@
 ---
 import Base from "../layouts/Base.astro";
 import StoreBadge from "../components/StoreBadge.astro";
+import { PRICES } from "../config";
 ---
 
 <Base
@@ -66,19 +67,34 @@ import StoreBadge from "../components/StoreBadge.astro";
 
   <section class="wrap section">
     <h2>What Apple bills</h2>
-    <p class="intro">Lengths and product IDs. The price you pay is the one Apple shows in your storefront — it can vary by country.</p>
+    <p class="intro">
+      Apple’s storefront is the source of truth. The amount you pay is whatever Apple shows for your country — it can differ from these typical US and Saudi figures. The SKU digits match the usual US tiers.
+    </p>
     <div style="overflow-x:auto">
       <table class="compare">
         <thead>
-          <tr><th>Length</th><th>Product ID</th></tr>
+          <tr>
+            <th>Length</th>
+            <th>Product ID</th>
+            <th>Typical US</th>
+            <th>Typical Saudi (SAR)</th>
+          </tr>
         </thead>
         <tbody>
-          <tr><td>Weekly</td><td><code>utgutgp_0199_1w</code></td></tr>
-          <tr><td>Monthly</td><td><code>utgutgp_0099_1m</code></td></tr>
-          <tr><td>Annual</td><td><code>utgutgp_0999_1y</code></td></tr>
+          {
+            PRICES.map((plan) => (
+              <tr>
+                <td>{plan.length}</td>
+                <td><code>{plan.id}</code></td>
+                <td>{plan.usd}</td>
+                <td>{plan.sar}</td>
+              </tr>
+            ))
+          }
         </tbody>
       </table>
     </div>
+    <p class="fine">Typical amounts, not a quote. Confirm in the App Store on your Apple ID before you subscribe.</p>
     <p>Subscribe or restore inside the app, signed into the Apple ID that should own the purchase.</p>
   </section>
 
@@ -88,7 +104,7 @@ import StoreBadge from "../components/StoreBadge.astro";
         <h2>How to cancel</h2>
         <p>iOS Settings → [your name] → Subscriptions → UTG Pro+ → Cancel Subscription. Deleting the app does not cancel billing. Restore is in the app, not on this site.</p>
       </div>
-      <StoreBadge />
+      <StoreBadge source="pricing" />
     </div>
     <p>Legal: <a href="/terms">Terms of Use (EULA)</a> · <a href="/privacy">Privacy Policy</a> · <a href="/subscription">Subscription Terms</a></p>
   </section>

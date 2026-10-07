@@ -1,0 +1,25 @@
+---
+const now = new Date();
+const release = Date.parse("2026-10-16T00:00:00");
+const days = Math.max(0, Math.ceil((release - now.getTime()) / 86_400_000));
+const dateLabel = now.toLocaleDateString("en-GB", { weekday: "short", day: "numeric", month: "short" });
+---
+
+<div class="watch-pair">
+  <div class="widget-home watch-pair-home">
+    <p class="widget-clock">9:41</p>
+    <p class="widget-date">{dateLabel}</p>
+    <div class="ios-widget">
+      <p class="ios-widget-app">UTG</p>
+      <p class="ios-widget-kicker">Next followed release</p>
+      <p class="ios-widget-title">Modern Warfare 4</p>
+      <p class="ios-widget-when">16 Oct 2026</p>
+    </div>
+  </div>
+  <div class="watch-face" role="img" aria-label={`Apple Watch complication: ${days} days until Modern Warfare 4`}>
+    <p class="watch-brand">UTG</p>
+    <p class="watch-days">{days}</p>
+    <p class="watch-unit">{days === 1 ? "day" : "days"}</p>
+    <p class="watch-title">MW4</p>
+  </div>
+</div>

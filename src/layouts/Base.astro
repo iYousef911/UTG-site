@@ -11,18 +11,37 @@ interface Props {
   current?: string;
   /** Apache internally rewrites some app paths; set banner from the address bar. */
   bannerFromLocation?: boolean;
-  jsonLd?: Record<string, unknown>;
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
   preload?: string;
+  lang?: string;
+  dir?: "ltr" | "rtl";
+  skipLabel?: string;
 }
 
-const { title, description, path, current, bannerFromLocation = false, jsonLd, preload } = Astro.props;
+const {
+  title,
+  description,
+  path,
+  current,
+  bannerFromLocation = false,
+  jsonLd,
+  preload,
+  lang = "en",
+  dir = "ltr",
+  skipLabel = "Skip to content",
+} = Astro.props;
 const canonical = path === "/" ? `${SITE.url}/` : `${SITE.url}${path}`;
 const pageTitle = title === SITE.name ? title : `${title} — UTG`;
 const banner = `app-id=${SITE.appId}, app-argument=${canonical}`;
+const jsonLdBlocks = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
+const ogImage = `${SITE.url}/img/og.png?v=2`;
+const isAr = path.startsWith("/ar");
+const altPath = isAr ? path.replace(/^\/ar/, "") || "/" : path === "/" ? "/ar/download" : `/ar${path}`;
+const altLang = isAr ? "en" : "ar";
 ---
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang={lang} dir={dir}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -46,12 +65,20 @@ const banner = `app-id=${SITE.appId}, app-argument=${canonical}`;
         </>
       )
     }
+    {
+      (path === "/download" || path === "/ar/download" || path === "/support" || path === "/ar/support") && (
+        <>
+          <link rel="alternate" hreflang={lang} href={canonical} />
+          <link rel="alternate" hreflang={altLang} href={`${SITE.url}${altPath === "/" ? "/" : altPath}`} />
+        </>
+      )
+    }
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" href="/favicon.png?v=5" type="image/png" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png?v=5" />
     <link rel="manifest" href="/site.webmanifest" />
     <link rel="preload" href="/fonts/outfit-latin.woff2" as="font" type="font/woff2" crossorigin />
-    {preload && <link rel="preload" href={preload} as="image" />}
+    {preload && <link rel="preload" href={preload} as="image" type={preload.endsWith(".webp") ? "image/webp" : undefined} />}
     <link rel="preconnect" href="https://umami.yadev.tech" crossorigin />
     <script
       defer
@@ -65,19 +92,21 @@ const banner = `app-id=${SITE.appId}, app-argument=${canonical}`;
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
-    <meta property="og:image" content={`${SITE.url}/img/og.png`} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={pageTitle} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={`${SITE.url}/img/og.png`} />
+    <meta name="twitter:image" content={ogImage} />
     {
-      jsonLd && (
-        <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
-      )
+      jsonLdBlocks.map((block) => (
+        <script type="application/ld+json" set:html={JSON.stringify(block)} />
+      ))
     }
   </head>
   <body>
-    <a class="skip-link" href="#content">Skip to content</a>
+    <a class="skip-link" href="#content">{skipLabel}</a>
     <Header current={current} />
     <main id="content">
       <slot />

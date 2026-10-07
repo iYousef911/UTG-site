@@ -1,7 +1,20 @@
 ---
 import { SITE } from "../config";
+
+interface Props {
+  source?: string;
+}
+
+const { source = "unknown" } = Astro.props;
+const path = Astro.url.pathname.replace(/\/$/, "") || "/";
 ---
 
-<a class="store-badge" href={SITE.appStore}>
+<a
+  class="store-badge"
+  href={SITE.appStore}
+  data-umami-event="app-store"
+  data-umami-event-source={source}
+  data-umami-event-path={path}
+>
   <img src="/img/app-store-badge.png" width="120" height="40" alt="Download on the App Store" />
 </a>

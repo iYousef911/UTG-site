@@ -1,26 +1,24 @@
 ---
 import Phone from "./Phone.astro";
+import UpcomingWidget from "./UpcomingWidget.astro";
 ---
 
 <div class="device-stage">
-  <Phone
-    variant="a"
-    src="/assets/search.png"
-    alt="UTG search with Coming soon and Trending on IGDB"
-    caption="Browse"
-  />
+  <Phone variant="a" caption="Widget">
+    <UpcomingWidget />
+  </Phone>
   <Phone
     variant="b"
-    src="/assets/widgets.png"
-    alt="UTG Home Screen widgets showing the next followed release"
-    caption="Widgets"
+    src="/assets/catalog.png"
+    alt="UTG Games list with Out this month dates for three titles"
+    caption="This month"
+    loading="eager"
+    fetchpriority="high"
   />
   <Phone
     variant="c"
-    src="/assets/game.png"
-    alt="UTG game page for Counter-Strike 2 with live context and release date"
-    caption="Game page"
-    loading="eager"
-    fetchpriority="high"
+    src="/assets/hero-countdown.png"
+    alt="Call of Duty: Modern Warfare 4 in UTG, release date 16 Oct 2026"
+    caption="Countdown"
   />
 </div>

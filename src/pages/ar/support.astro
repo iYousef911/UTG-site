@@ -1,0 +1,69 @@
+---
+import Base from "../../layouts/Base.astro";
+import { SITE } from "../../config";
+
+const mailto = `mailto:${SITE.email}?subject=${encodeURIComponent("دعم UTG")}`;
+---
+
+<Base
+  title="الدعم"
+  description={`راسل ${SITE.email} لدعم UTG. لا يوجد دعم هاتفي. المشغّل Yad3V، المملكة العربية السعودية.`}
+  path="/ar/support"
+  current="/ar/support"
+  lang="ar"
+  dir="rtl"
+  skipLabel="تخطَّ إلى المحتوى"
+>
+  <div class="wrap page-hero">
+    <p class="kicker">الدعم</p>
+    <h1>البريد هو قناة الدعم</h1>
+    <p>
+      لا يوجد دعم هاتفي. اذكر إصدار iOS والجهاز، وللمشاكل الحسابية البريد المرتبط بآبل أو غوغل.
+      المشغّل: {SITE.legalName}، المملكة العربية السعودية.
+    </p>
+    <p><a href="/support" hreflang="en" lang="en">English support</a></p>
+  </div>
+
+  <section class="wrap legal" style="padding-top:1.5rem">
+    <form class="support-form" id="support-form-ar" action={mailto} method="get">
+      <p>
+        يفتح تطبيق البريد إلى <a class="mail" href={mailto}>{SITE.email}</a>.
+        لا يُحفظ شيء على هذا الخادم. إن لم يعمل الزر، اضغط العنوان.
+      </p>
+      <label for="ios">إصدار iOS / iPadOS</label>
+      <input id="ios" name="ios" type="text" autocomplete="off" placeholder="مثال: iOS 18.5" />
+      <label for="device">الجهاز</label>
+      <input id="device" name="device" type="text" autocomplete="off" placeholder="مثال: iPhone 16" />
+      <label for="message">ماذا حدث؟</label>
+      <textarea id="message" name="message" required placeholder="ما الذي توقعته، وما الذي رأيته."></textarea>
+      <div class="hero-actions">
+        <button class="btn btn-primary" type="submit">فتح تطبيق البريد</button>
+        <a class="btn btn-ghost" href={mailto}>إرسال بلا النموذج</a>
+      </div>
+      <p class="fine">نهدف للرد خلال 3 أيام عمل. لا نستطيع استرداد رسوم أبل أو إعادة تعيين Apple ID من هذا الموقع.</p>
+    </form>
+
+    <h2>حلول شائعة</h2>
+    <ul>
+      <li><strong>التنبيهات مغلقة.</strong> الإعدادات ← التنبيهات ← UTG. وتأكد أنك تتابع اللعبة داخل التطبيق.</li>
+      <li><strong>المجموعات لا تتزامن.</strong> نفس Apple ID على كل جهاز، وWi-Fi. المجموعات في iCloud وليس على هذا الموقع.</li>
+      <li><strong>حد الذكاء الاصطناعي.</strong> الحساب المجاني له محاولات محدودة ثم UTG Pro+.</li>
+      <li><strong>حد المتابعة.</strong> المجاني <strong>3</strong> ألعاب. ألغِ متابعة واحدة أو اشترك في Pro+.</li>
+      <li><strong>استعادة الشراء.</strong> داخل التطبيق، من نفس Apple ID الذي اشترى Pro+.</li>
+    </ul>
+    <p>إلغاء الاشتراك: الإعدادات ← [اسمك] ← الاشتراكات ← UTG Pro+ ← إلغاء. <a href="/subscription">شروط الاشتراك</a>.</p>
+  </section>
+</Base>
+
+<script>
+  const form = document.getElementById("support-form-ar");
+  form?.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const ios = (document.getElementById("ios") as HTMLInputElement | null)?.value.trim() ?? "";
+    const device = (document.getElementById("device") as HTMLInputElement | null)?.value.trim() ?? "";
+    const message = (document.getElementById("message") as HTMLTextAreaElement | null)?.value.trim() ?? "";
+    const body = [`الصفحة: /ar/support`, `iOS: ${ios || "(غير مذكور)"}`, `الجهاز: ${device || "(غير مذكور)"}`, "", message].join("\n");
+    const url = `mailto:yad3v.dev@gmail.com?subject=${encodeURIComponent("دعم UTG")}&body=${encodeURIComponent(body)}`;
+    window.location.href = url;
+  });
+</script>

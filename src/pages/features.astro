@@ -2,6 +2,11 @@
 import Base from "../layouts/Base.astro";
 import StoreBadge from "../components/StoreBadge.astro";
 import Lottie from "../components/Lottie.astro";
+import Shot from "../components/Shot.astro";
+import WatchComplication from "../components/WatchComplication.astro";
+import NearbyMap from "../components/NearbyMap.astro";
+import AiThread from "../components/AiThread.astro";
+import BuyWaitLight from "../components/BuyWaitLight.astro";
 ---
 
 <Base
@@ -11,12 +16,12 @@ import Lottie from "../components/Lottie.astro";
   current="/features"
 >
   <div class="wrap page-hero">
-    <img class="hero-icon" src="/assets/app-icon-128.png" width="56" height="56" alt="UTG app icon" />
+    <img class="hero-icon" src="/assets/app-icon-128.webp" width="56" height="56" alt="UTG app icon" />
     <p class="kicker">Features</p>
     <h1>One list. Honest limits.</h1>
     <p>Pick games you care about, get dates and alerts in one place. Free users follow three. Pro+ is there if the list grows — billed by Apple, not by a card form on this site.</p>
     <div class="hero-actions">
-      <StoreBadge />
+      <StoreBadge source="features" />
       <a class="btn btn-ghost" href="#how-it-works">How it works</a>
     </div>
   </div>
@@ -55,7 +60,7 @@ import Lottie from "../components/Lottie.astro";
         <p>Discover games from IGDB. Filter by platform, open a title for the date — not another tab of screenshots you will not reopen.</p>
       </div>
       <figure class="shot">
-        <img src="/assets/search.png" width="390" height="844" alt="UTG search with Coming soon and Trending on IGDB" loading="lazy" decoding="async" />
+        <Shot src="/assets/search.png" alt="UTG search with Coming soon and Trending on IGDB" loading="lazy" />
       </figure>
     </div>
 
@@ -63,10 +68,10 @@ import Lottie from "../components/Lottie.astro";
       <div>
         <p class="limit">Free: 3 follows · Pro+: unlimited</p>
         <h3>Upcoming releases</h3>
-        <p>Track upcoming (and out-now) dates for games you follow. The free watchlist is three titles on purpose — enough for a personal release plan, small enough that alerts stay useful. UTG Pro+ lifts the follow limit when you want a longer list.</p>
+        <p>Track upcoming dates for games you follow. The free watchlist is three titles on purpose — enough for a personal release plan, small enough that alerts stay useful. UTG Pro+ lifts the follow limit when you want a longer list.</p>
       </div>
       <figure class="shot">
-        <img src="/assets/game.png" width="390" height="844" alt="Game page with live context, rating, and release date" loading="lazy" decoding="async" />
+        <Shot src="/assets/hero-countdown.png" alt="Call of Duty: Modern Warfare 4 in UTG with release date 16 Oct 2026" loading="lazy" />
       </figure>
     </div>
 
@@ -77,7 +82,7 @@ import Lottie from "../components/Lottie.astro";
         <p>Favorites and collections sync with iCloud on the Apple ID signed into the device. We do not sell your game list and we do not share it for advertising. See the <a href="/privacy">Privacy Policy</a>.</p>
       </div>
       <figure class="shot">
-        <img src="/assets/favorites.png" width="390" height="844" alt="Favorites list in UTG with Counter-Strike 2 and Wardogs" loading="lazy" decoding="async" />
+        <Shot src="/assets/favorites.png" alt="Favorites list in UTG with Counter-Strike 2 and Wardogs" loading="lazy" />
       </figure>
     </div>
 
@@ -87,8 +92,8 @@ import Lottie from "../components/Lottie.astro";
         <h3>Price tracking / Buy or Wait</h3>
         <p>Compare a current listing with historical-low context so you can wait or buy with less guesswork. Full price tools are UTG Pro+. Verdicts are informational, not financial advice. UTG is not a storefront. <strong>We do not store payment cards</strong> — Apple In-App Purchase handles Pro+ billing.</p>
       </div>
-      <figure class="shot">
-        <img src="/assets/price.png" width="390" height="844" alt="Buy or Wait with historical low versus current Steam price" loading="lazy" decoding="async" />
+      <figure class="shot shot-ui">
+        <BuyWaitLight />
       </figure>
     </div>
 
@@ -99,7 +104,7 @@ import Lottie from "../components/Lottie.astro";
         <p>Epic free promotions, Game Pass listings, and giveaways in one scan. Availability is set by those stores and by region. Confirm on the official store before you claim anything.</p>
       </div>
       <figure class="shot">
-        <img src="/assets/catalog.png" width="390" height="720" alt="Games list with Out this month and Epic Free promotions" loading="lazy" decoding="async" />
+        <Shot src="/assets/catalog.png" width={390} height={720} alt="Games list with Out this month and Epic Free promotions" loading="lazy" />
       </figure>
     </div>
 
@@ -109,8 +114,8 @@ import Lottie from "../components/Lottie.astro";
         <h3>AI game advisor + chat</h3>
         <p>Ask for a recommendation, a “what should I play,” or a second look at a title. Free users get limited tries; after that, UTG Pro+. Prompts go through our backend to OpenAI. Do not include passwords or personal data. The model can be wrong — check the catalog date before you rearrange your week.</p>
       </div>
-      <figure class="shot">
-        <img src="/assets/ai.png" width="390" height="844" alt="Game Assistant chat recommending titles similar to Call of Duty" loading="lazy" decoding="async" />
+      <figure class="shot shot-ui">
+        <AiThread />
       </figure>
     </div>
 
@@ -118,21 +123,26 @@ import Lottie from "../components/Lottie.astro";
       <div>
         <p class="limit">Optional · When In Use</p>
         <h3>Weather and nearby play</h3>
-        <p>When-in-use location only, if you allow it: city weather and nearby game stores on the map. Not used for ads. Not required for follows, catalog, or AI. Deny location and the rest of the app still works.</p>
+        <p>When-in-use location only, if you allow it: city weather and nearby game stores on the map. Not used for ads. Not required for follows, catalog, or AI. Deny location and the rest of the app still works. The map does not show your home address.</p>
       </div>
-      <figure class="shot">
-        <img src="/assets/weather.png" width="390" height="512" alt="UTG weather for London showing current temperature and conditions" loading="lazy" decoding="async" />
-      </figure>
+      <div class="shot-stack">
+        <figure class="shot">
+          <Shot src="/assets/weather.png" width={390} height={512} alt="UTG weather for London showing current temperature and conditions" loading="lazy" />
+        </figure>
+        <figure class="shot shot-ui">
+          <NearbyMap />
+        </figure>
+      </div>
     </div>
 
     <div class="feature-block reverse">
       <div>
         <p class="limit">Home Screen + Watch</p>
         <h3>Widgets and complications</h3>
-        <p>Widgets and Apple Watch complications countdown the next followed release. They show data you already follow in the app.</p>
+        <p>Widgets and Apple Watch complications countdown the next followed release — an upcoming title, not an “OUT now” tile. They show data you already follow in the app.</p>
       </div>
-      <figure class="shot">
-        <img src="/assets/widgets.png" width="390" height="844" alt="Home Screen widgets for the next UTG followed release" loading="lazy" decoding="async" />
+      <figure class="shot shot-wide shot-ui">
+        <WatchComplication />
       </figure>
     </div>
 

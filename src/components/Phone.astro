@@ -1,4 +1,6 @@
 ---
+import Shot from "./Shot.astro";
+
 interface Props {
   src?: string;
   alt?: string;
@@ -16,15 +18,7 @@ const { src, alt = "", caption, variant, loading = "lazy", fetchpriority = "auto
     <slot>
       {
         src && (
-          <img
-            src={src}
-            width="390"
-            height="844"
-            alt={alt}
-            loading={loading}
-            decoding="async"
-            fetchpriority={fetchpriority}
-          />
+          <Shot src={src} alt={alt} loading={loading} fetchpriority={fetchpriority} />
         )
       }
     </slot>

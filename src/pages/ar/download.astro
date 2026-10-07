@@ -1,0 +1,50 @@
+---
+import Base from "../../layouts/Base.astro";
+import StoreRow from "../../components/StoreRow.astro";
+import Shot from "../../components/Shot.astro";
+import { SITE } from "../../config";
+---
+
+<Base
+  title="تحميل"
+  description="حمّل UTG – Up To Game Pro من App Store. آيفون وآيباد، iOS 18 أو أحدث. رقم التطبيق 1480143119."
+  path="/ar/download"
+  current="/ar/download"
+  lang="ar"
+  dir="rtl"
+  skipLabel="تخطَّ إلى المحتوى"
+>
+  <div class="wrap page-hero">
+    <p class="kicker">تحميل</p>
+    <h1>حمّل UTG من App Store</h1>
+    <p>
+      آيفون وآيباد، بنظام iOS 18 أو أحدث. ابحث عن <strong>UTG – Up To Game Pro</strong>، رقم التطبيق {SITE.appId}.
+      المشغّل: {SITE.legalName}، المملكة العربية السعودية.
+    </p>
+    <p><a href="/download" hreflang="en" lang="en">English download page</a></p>
+  </div>
+
+  <section class="wrap section">
+    <div class="hero-actions">
+      <StoreRow source="ar-download" qr />
+      <a class="btn btn-ghost" href="/ar/support">تحتاج مساعدة؟</a>
+    </div>
+    <p class="fine">
+      الموقع لا يستضيف ملف التطبيق. أبل هي من يسلّمه. على الآيفون قد يظهر شريط Smart App Banner.
+      على الكمبيوتر امسح رمز QR.
+    </p>
+    <figure class="shot" style="margin-top:1.5rem">
+      <Shot src="/assets/search.png" alt="بحث UTG في كتالوج IGDB" loading="lazy" />
+    </figure>
+  </section>
+
+  <section class="wrap section">
+    <h2>التوافق</h2>
+    <div class="grid grid-2">
+      <article class="card"><h3>آيفون وآيباد</h3><p>iOS 18.0 / iPadOS 18.0 أو أحدث.</p></article>
+      <article class="card"><h3>Apple Watch</h3><p>watchOS 11 أو أحدث لمضاعفات العدّ التنازلي.</p></article>
+      <article class="card"><h3>الشبكة</h3><p>الكتالوج والأسعار والذكاء الاصطناعي والتنبيهات تحتاج اتصالًا بالإنترنت.</p></article>
+      <article class="card"><h3>ليس متجرًا</h3><p>UTG لا يبيع الألعاب. أكّد التاريخ والسعر في المتجر الرسمي.</p></article>
+    </div>
+  </section>
+</Base>

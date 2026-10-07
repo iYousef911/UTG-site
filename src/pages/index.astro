@@ -1,9 +1,11 @@
 ---
 import Base from "../layouts/Base.astro";
-import StoreBadge from "../components/StoreBadge.astro";
+import StoreRow from "../components/StoreRow.astro";
 import HeroDevices from "../components/HeroDevices.astro";
 import Faq from "../components/Faq.astro";
 import Lottie from "../components/Lottie.astro";
+import Shot from "../components/Shot.astro";
+import BuyWaitLight from "../components/BuyWaitLight.astro";
 import { SITE } from "../config";
 
 const faqs = [
@@ -28,6 +30,8 @@ const faqs = [
     a: 'iOS Settings → [your name] → Subscriptions → UTG Pro+ → Cancel Subscription. Apple handles the charge and the cancel. Deleting the app or your UTG account does not cancel billing. Details: <a href="/subscription">Subscription Terms</a>.',
   },
 ];
+
+const stripHtml = (value: string) => value.replace(/<[^>]+>/g, "");
 ---
 
 <Base
@@ -35,31 +39,43 @@ const faqs = [
   description={SITE.sub}
   path="/"
   current="/"
-  preload="/assets/game.png"
-  jsonLd={{
-    "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
-    name: SITE.name,
-    operatingSystem: "iOS 18",
-    applicationCategory: "EntertainmentApplication",
-    description: SITE.sub,
-    offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
-    downloadUrl: SITE.appStore,
-    author: { "@type": "Organization", name: SITE.legalName },
-  }}
+  preload="/assets/catalog.webp"
+  jsonLd={[
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      name: SITE.name,
+      operatingSystem: "iOS 18",
+      applicationCategory: "EntertainmentApplication",
+      description: SITE.sub,
+      offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+      downloadUrl: SITE.appStore,
+      author: { "@type": "Organization", name: SITE.legalName },
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: faqs.map((item) => ({
+        "@type": "Question",
+        name: item.q,
+        acceptedAnswer: { "@type": "Answer", text: stripHtml(item.a) },
+      })),
+    },
+  ]}
 >
   <section class="wrap hero-split">
     <div>
-      <img class="hero-icon" src="/assets/app-icon-128.png" width="56" height="56" alt="UTG app icon" />
+      <img class="hero-icon" src="/assets/app-icon-128.webp" width="56" height="56" alt="UTG app icon" />
       <p class="kicker">iOS 18+ · App Store</p>
       <h1>{SITE.tagline}</h1>
       <p class="lede">{SITE.sub}</p>
       <div class="hero-actions">
-        <StoreBadge />
+        <StoreRow source="home" qr />
         <a class="btn btn-ghost" href="#how-it-works">How it works</a>
       </div>
       <p class="fine">
         Free to download. Optional UTG Pro+ via Apple In-App Purchase. We never see your card number — Apple handles billing.
+        Phone: Smart App Banner. Desktop: scan the QR.
       </p>
     </div>
     <HeroDevices />
@@ -111,17 +127,33 @@ const faqs = [
     <p class="kicker">On the deck</p>
     <h2>What you actually get</h2>
     <p class="intro">Honest limits. No invented awards. Full write-up on <a href="/features">Features</a>.</p>
-    <div class="grid grid-2">
+    <div class="home-shots">
       <article class="card">
+        <figure class="shot">
+          <Shot src="/assets/search.png" alt="UTG search with Coming soon and Trending on IGDB" loading="lazy" />
+        </figure>
+        <p class="pill pill-free">IGDB catalog</p>
+        <h3>Search</h3>
+        <p>Find a title, open the date. The homepage promise starts here — pick three from the catalog, not from a rumor thread.</p>
+      </article>
+      <article class="card">
+        <figure class="shot">
+          <Shot src="/assets/favorites.png" alt="Favorites list in UTG" loading="lazy" />
+        </figure>
         <p class="pill pill-free">Free: 3 follows</p>
-        <h3>Upcoming releases</h3>
-        <p>Follow dates for games you care about. Free users can follow three. UTG Pro+ removes that cap so the watchlist can grow without dropping titles.</p>
+        <h3>Favorites</h3>
+        <p>Keep the games you mean to play. Free users follow three. Collections sync with iCloud on the Apple ID signed into the device.</p>
       </article>
       <article class="card">
+        <figure class="shot shot-ui">
+          <BuyWaitLight />
+        </figure>
         <p class="pill">Pro+ for full tools</p>
-        <h3>Price tracking / Buy or Wait</h3>
-        <p>See whether a price looks like a historical low or a “buy now” moment. Full price tools are UTG Pro+. UTG does not sell games and does not store payment cards.</p>
+        <h3>Buy or Wait</h3>
+        <p>Compare a listing with historical-low context. Full price tools are UTG Pro+. UTG does not sell games and does not store payment cards.</p>
       </article>
+    </div>
+    <div class="grid grid-2" style="margin-top:1.5rem">
       <article class="card">
         <p class="pill pill-free">On-device + iCloud</p>
         <h3>Collections with iCloud</h3>
