@@ -309,6 +309,20 @@ h3 { font-size: 1.12rem; letter-spacing: -0.02em; }
   box-shadow: 0 0 0 1px rgba(255,255,255,0.12), 0 12px 40px rgba(0,0,0,0.4);
 }
 
+.lottie,
+dotlottie-wc {
+  display: block;
+  flex: none;
+}
+.lottie-xs { width: 36px; height: 36px; }
+.lottie-sm { width: 88px; height: 88px; }
+.lottie-md { width: 120px; height: 120px; }
+.lottie-lg {
+  width: min(280px, 72vw);
+  height: min(280px, 72vw);
+  margin-inline: auto;
+}
+
 .hero-split {
   display: grid;
   grid-template-columns: minmax(0, 0.9fr) minmax(380px, 1.1fr);
@@ -501,6 +515,9 @@ h3 { font-size: 1.12rem; letter-spacing: -0.02em; }
   border: 1px solid var(--line);
   border-radius: var(--radius);
   padding: 1.2rem 1.25rem 1.3rem;
+}
+.loop .lottie {
+  margin: 0.15rem 0 0.65rem;
 }
 .loop article::before {
   counter-increment: step;

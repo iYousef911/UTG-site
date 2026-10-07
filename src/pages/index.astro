@@ -3,6 +3,7 @@ import Base from "../layouts/Base.astro";
 import StoreBadge from "../components/StoreBadge.astro";
 import HeroDevices from "../components/HeroDevices.astro";
 import Faq from "../components/Faq.astro";
+import Lottie from "../components/Lottie.astro";
 import { SITE } from "../config";
 
 const faqs = [
@@ -88,18 +89,22 @@ const faqs = [
     <p class="intro">Browse. Follow. Get told. That is the whole product.</p>
     <div class="loop">
       <article>
+        <Lottie src="/lottie/browse.lottie" />
         <h3>Browse IGDB</h3>
         <p>Search and open games from the IGDB catalog. Platform and genre filters cut the noise so you are looking at a date, not a rumor thread.</p>
       </article>
       <article>
+        <Lottie src="/lottie/follow.lottie" />
         <h3>Follow / favorite</h3>
         <p>Follow or favorite what you mean to play. Free accounts can follow 3 games. Collections sync with iCloud on your Apple devices.</p>
       </article>
       <article>
+        <Lottie src="/lottie/notify.lottie" />
         <h3>Get notified</h3>
         <p>Allow notifications and we remind you about releases you follow. Turn them off in iOS Settings anytime. Live catalog and alerts need a network connection.</p>
       </article>
     </div>
+    <p class="fine">Loop motion from <a href="https://lottiefiles.com">LottieFiles</a>, used under the Lottie Simple License.</p>
   </section>
 
   <section class="wrap section" id="features">

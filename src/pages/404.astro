@@ -1,10 +1,12 @@
 ---
 import Base from "../layouts/Base.astro";
 import StoreBadge from "../components/StoreBadge.astro";
+import Lottie from "../components/Lottie.astro";
 ---
 
 <Base title="Page not found" description="No page at this URL on the UTG site." path="/404">
   <div class="wrap gone">
+    <Lottie src="/lottie/gone.lottie" size="lg" />
     <p class="kicker">404</p>
     <h1>Missed the spawn</h1>
     <p class="lede" style="margin-inline:auto">

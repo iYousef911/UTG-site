@@ -1,6 +1,7 @@
 ---
 import Base from "../layouts/Base.astro";
 import StoreBadge from "../components/StoreBadge.astro";
+import Lottie from "../components/Lottie.astro";
 ---
 
 <Base
@@ -25,14 +26,17 @@ import StoreBadge from "../components/StoreBadge.astro";
     <h2>How it works</h2>
     <div class="loop">
       <article>
+        <Lottie src="/lottie/browse.lottie" />
         <h3>Browse IGDB</h3>
         <p>Discover games from IGDB. Open a title for the date and platforms — not another tab of screenshots you will not reopen.</p>
       </article>
       <article>
+        <Lottie src="/lottie/follow.lottie" />
         <h3>Follow / favorite</h3>
         <p>Follow or favorite what you intend to play. Free: <strong>3 follows</strong>. Pro+: unlimited. Collections sync with iCloud.</p>
       </article>
       <article>
+        <Lottie src="/lottie/notify.lottie" />
         <h3>Get notified</h3>
         <p>Release reminders for games you follow, if you allow notifications. Off in iOS Settings → Notifications → UTG.</p>
       </article>
